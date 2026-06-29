@@ -124,7 +124,7 @@ function get_and_optimize_logo($settings) {
         }
         
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
-        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'test.sparklesapartments.ng';
+        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'jemmylandhotels.com';
         
         return $protocol . $host . '/' . $filename;
     }
@@ -220,11 +220,11 @@ function send_smtp_email($to, $subject, $html, $from, $settings, $replyTo = null
         // Construct standard MIME headers
         $boundary = '----=' . md5(uniqid(rand(), true));
         
-        $senderName = "Sparkles Apartments";
+        $senderName = "Jemmyland";
         if (strpos($from, 'contact@') !== false) {
-            $senderName = "Sparkles Contact Form";
+            $senderName = "Jemmyland Contact Form";
         } else if (strpos($from, 'info@') !== false) {
-            $senderName = "Sparkles Info";
+            $senderName = "Jemmyland Info";
         }
         
         $headers = [];
@@ -311,7 +311,7 @@ else if ($route === 'email/send') {
     $to = isset($postData['to']) ? $postData['to'] : '';
     $subject = isset($postData['subject']) ? $postData['subject'] : '';
     $html = isset($postData['html']) ? $postData['html'] : '';
-    $from = isset($postData['from']) ? $postData['from'] : 'booking@sparklesapartments.ng';
+    $from = isset($postData['from']) ? $postData['from'] : 'booking@jemmylandhotels.com';
     
     if (!$to || !$subject || !$html) {
         http_response_code(400);
@@ -348,7 +348,7 @@ else if ($route === 'email/send') {
         // Fallback to standard HTML email headers for cPanel mail server via PHP mail()
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-Type: text/html; charset=UTF-8" . "\r\n";
-        $headers .= "From: Sparkles Apartments <" . $from . ">" . "\r\n";
+        $headers .= "From: Jemmyland Hotels <" . $from . ">" . "\r\n";
         $headers .= "Reply-To: " . $from . "\r\n";
         $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
         
@@ -383,7 +383,7 @@ else if ($route === 'sms/send') {
     $settings = get_supabase_settings();
     $gateway = isset($settings['sms_gateway']) ? $settings['sms_gateway'] : 'mock';
     $termiiKey = isset($settings['sms_termii_api_key']) ? $settings['sms_termii_api_key'] : '';
-    $termiiSender = isset($settings['sms_termii_sender_id']) ? $settings['sms_termii_sender_id'] : 'Sparkles';
+    $termiiSender = isset($settings['sms_termii_sender_id']) ? $settings['sms_termii_sender_id'] : 'Jemmyland';
     $twilioSid = isset($settings['sms_twilio_account_sid']) ? $settings['sms_twilio_account_sid'] : '';
     $twilioToken = isset($settings['sms_twilio_auth_token']) ? $settings['sms_twilio_auth_token'] : '';
     $twilioFrom = isset($settings['sms_twilio_from_number']) ? $settings['sms_twilio_from_number'] : '';
@@ -531,7 +531,7 @@ else if ($route === 'contact/submit') {
     
     $settings = get_supabase_settings();
     $logoUrl = get_and_optimize_logo($settings);
-    $logoHtml = !empty($logoUrl) ? '<img src="' . $logoUrl . '" alt="Sparkles Apartments" style="max-height: 50px; object-fit: contain; margin-bottom: 8px; border-radius: 4px;" /><br/>' : '';
+    $logoHtml = !empty($logoUrl) ? '<img src="' . $logoUrl . '" alt="Jemmyland Hotels" style="max-height: 50px; object-fit: contain; margin-bottom: 8px; border-radius: 4px;" /><br/>' : '';
 
     $systemTheme = isset($settings['system_theme']) ? $settings['system_theme'] : 'theme-luxe-gold';
     $themeColors = [
@@ -546,15 +546,15 @@ else if ($route === 'contact/submit') {
     ];
     $accentColor = isset($themeColors[$systemTheme]) ? $themeColors[$systemTheme] : '#DF6853';
 
-    // 1. Send the contact message details TO contact@sparklesapartments.ng
-    $toAdmin = 'contact@sparklesapartments.ng';
+    // 1. Send the contact message details TO contact@jemmylandhotels.com
+    $toAdmin = 'contact@jemmylandhotels.com';
     $subjectAdmin = 'New Contact Form Submission: ' . $subject;
     
     $htmlAdmin = "
         <div style=\"font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd; border-top: 6px solid {$accentColor}; max-width: 600px; border-radius: 8px;\">
             <div style=\"text-align: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 20px;\">
                 {$logoHtml}
-                <h2 style=\"color: #000; margin: 0; font-size: 20px; font-weight: bold;\">SPARKLES APARTMENTS</h2>
+                <h2 style=\"color: #000; margin: 0; font-size: 20px; font-weight: bold;\">Jemmyland Hotels</h2>
                 <span style=\"font-size: 11px; color: {$accentColor}; text-transform: uppercase; font-weight: bold;\">Admin Submission Alert</span>
             </div>
             <p><strong>Name:</strong> {$name}</p>
@@ -568,23 +568,23 @@ else if ($route === 'contact/submit') {
     ";
     
     // 2. Send an AUTO-RESPONDER to the guest's email address
-    $subjectGuest = 'Message Received: Sparkles Apartments';
+    $subjectGuest = 'Message Received: Jemmyland Hotels';
     
     $htmlGuest = "
         <div style=\"font-family: Arial, sans-serif; padding: 25px; color: #333; max-width: 600px; margin: auto; border: 1px solid #eaeaea; border-top: 6px solid {$accentColor}; border-radius: 12px;\">
             <div style=\"text-align: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 20px;\">
                 {$logoHtml}
-                <h2 style=\"color: #000; margin: 0; font-size: 20px; font-weight: bold;\">SPARKLES APARTMENTS</h2>
+                <h2 style=\"color: #000; margin: 0; font-size: 20px; font-weight: bold;\">Jemmyland Hotels</h2>
                 <span style=\"font-size: 11px; color: {$accentColor}; text-transform: uppercase; font-weight: bold; letter-spacing: 0.1em;\">Premium Luxury Hotel</span>
             </div>
             <p>Dear {$name},</p>
-            <p>Thank you for reaching out to Sparkles Apartments. We have received your inquiry regarding <strong>\"{$subject}\"</strong>.</p>
+            <p>Thank you for reaching out to Jemmyland Hoteld. We have received your inquiry regarding <strong>\"{$subject}\"</strong>.</p>
             <p>Our dedicated team is reviewing your message and will get back to you within 24 hours.</p>
             <p>If your request is urgent, please do not hesitate to contact us directly via phone.</p>
             <p style=\"margin-top: 25px;\">Warm regards,</p>
-            <p style=\"font-weight: bold; color: {$accentColor}; margin: 0;\">Sparkles Guest Support Team</p>
+            <p style=\"font-weight: bold; color: {$accentColor}; margin: 0;\">Jemmyland Guest Support Team</p>
             <div style=\"margin-top: 30px; padding-top: 15px; border-top: 1px solid #f0f0f0; text-align: center; font-size: 11px; color: #9ca3af;\">
-                <p style=\"margin: 0;\">Phones: 08033214684, 08062332639 | Email: contact@sparklesapartments.ng</p>
+                <p style=\"margin: 0;\">Phones: 08033214684, 08062332639 | Email: contact@jemmylandhotels.com</p>
                 <p style=\"margin: 5px 0 0 0;\">Plot 572 Iduwa Ogenyi Street Mabushi, Off Ahmadu Bello Way, Abuja</p>
             </div>
         </div>
@@ -595,10 +595,10 @@ else if ($route === 'contact/submit') {
     if ($smtpEnabled) {
         try {
             // Send inquiry to admin
-            $adminSent = send_smtp_email($toAdmin, $subjectAdmin, $htmlAdmin, 'contact@sparklesapartments.ng', $settings, "{$name} <{$email}>");
+            $adminSent = send_smtp_email($toAdmin, $subjectAdmin, $htmlAdmin, 'contact@jemmylandhotels.com', $settings, "{$name} <{$email}>");
             
             // Send auto-responder to guest
-            $guestSent = send_smtp_email($email, $subjectGuest, $htmlGuest, 'contact@sparklesapartments.ng', $settings);
+            $guestSent = send_smtp_email($email, $subjectGuest, $htmlGuest, 'contact@jemmylandhotels.com', $settings);
             
             if ($adminSent && $guestSent) {
                 echo json_encode(["success" => true]);
@@ -615,15 +615,15 @@ else if ($route === 'contact/submit') {
         // Fallback to PHP mail()
         $headersAdmin = "MIME-Version: 1.0" . "\r\n";
         $headersAdmin .= "Content-Type: text/html; charset=UTF-8" . "\r\n";
-        $headersAdmin .= "From: Sparkles Contact Form <contact@sparklesapartments.ng>" . "\r\n";
+        $headersAdmin .= "From: Jemmyland Contact Form <contact@jemmylandhotels.com>" . "\r\n";
         $headersAdmin .= "Reply-To: {$name} <{$email}>" . "\r\n";
         
         $adminSent = mail($toAdmin, $subjectAdmin, $htmlAdmin, $headersAdmin);
         
         $headersGuest = "MIME-Version: 1.0" . "\r\n";
         $headersGuest .= "Content-Type: text/html; charset=UTF-8" . "\r\n";
-        $headersGuest .= "From: Sparkles Apartments <contact@sparklesapartments.ng>" . "\r\n";
-        $headersGuest .= "Reply-To: contact@sparklesapartments.ng" . "\r\n";
+        $headersGuest .= "From: Jemmyland Hotels <contact@jemmylandhotels.com>" . "\r\n";
+        $headersGuest .= "Reply-To: contact@jemmylandhotels.com" . "\r\n";
         
         $guestSent = mail($email, $subjectGuest, $htmlGuest, $headersGuest);
         
