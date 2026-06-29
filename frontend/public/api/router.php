@@ -575,7 +575,7 @@ else if ($route === 'contact/submit') {
             <div style=\"text-align: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 20px;\">
                 {$logoHtml}
                 <h2 style=\"color: #000; margin: 0; font-size: 20px; font-weight: bold;\">SPARKLES APARTMENTS</h2>
-                <span style=\"font-size: 11px; color: {$accentColor}; text-transform: uppercase; font-weight: bold; letter-spacing: 0.1em;\">Premium Luxury Shortlets</span>
+                <span style=\"font-size: 11px; color: {$accentColor}; text-transform: uppercase; font-weight: bold; letter-spacing: 0.1em;\">Premium Luxury Hotel</span>
             </div>
             <p>Dear {$name},</p>
             <p>Thank you for reaching out to Sparkles Apartments. We have received your inquiry regarding <strong>\"{$subject}\"</strong>.</p>

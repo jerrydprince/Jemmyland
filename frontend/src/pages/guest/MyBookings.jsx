@@ -12,9 +12,9 @@ const MyBookings = () => {
   const [activeReceiptBooking, setActiveReceiptBooking] = useState(null);
   const [printType, setPrintType] = useState('receipt'); // 'receipt' or 'invoice'
   const [contactInfo, setContactInfo] = useState({
-    address: 'Plot 572 Iduwa Ogenyi Street Mabushi, Off Ahmadu Bello Way, Abuja',
+    address: 'No2. Gowon P Haruna Close, Karu, Abuja',
     phone: '08033214684, 08062332639, 08171278657',
-    email: 'info@sparklesapartments.ng',
+    email: 'info@jemmylandhotels.com',
     logo: ''
   });
 
@@ -226,9 +226,9 @@ const MyBookings = () => {
             </div>
             <div className="text-right">
               {contactInfo.logo && (
-                <img src={contactInfo.logo} alt="Sparkles Apartments Logo" className="max-h-12 object-contain ml-auto mb-2" />
+                <img src={contactInfo.logo} alt="Jemmyland Hotels Logo" className="max-h-12 object-contain ml-auto mb-2" />
               )}
-              <h2 className="text-lg font-black tracking-widest text-black">SPARKLES APARTMENTS</h2>
+              <h2 className="text-lg font-black tracking-widest text-black">Jemmyland Hotels</h2>
               <p className="text-xs text-gray-600">{contactInfo.address}</p>
               <p className="text-xs text-gray-600">{contactInfo.phone}</p>
               <p className="text-xs text-gray-600">{contactInfo.email}</p>
@@ -427,7 +427,7 @@ const MyBookings = () => {
           })()}
 
           <div className="mt-16 text-center text-[10px] text-gray-400 border-t pt-4">
-            <p>Thank you for staying at Sparkles Apartments. Have a wonderful experience!</p>
+            <p>Thank you for staying at Jemmyland Hotels. Have a wonderful experience!</p>
           </div>
         </div>
       )}

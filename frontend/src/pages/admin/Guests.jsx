@@ -202,9 +202,9 @@ const AdminGuests = () => {
   };
 
   const [contactInfo, setContactInfo] = useState({
-    address: 'Plot 572 Iduwa Ogenyi Street Mabushi, Off Ahmadu Bello Way, Abuja',
+    address: 'No2. Gowon P Haruna Close, Karu, Abuja',
     phone: '08033214684, 08062332639, 08171278657',
-    email: 'info@sparklesapartments.ng',
+    email: 'info@jemmylandhotels.com',
     logo: ''
   });
 
@@ -1069,7 +1069,7 @@ const AdminGuests = () => {
           </table>
           
           <div class="footer">
-            Thank you for choosing Sparkles Apartments.<br />
+            Thank you for choosing Jemmyland Hotels.<br />
             For support or billing inquiries, please contact ${contactInfo.email}.
           </div>
         </body>
@@ -1302,13 +1302,13 @@ const AdminGuests = () => {
           
           const emailHtml = `
             <div style="font-family: sans-serif; padding: 20px; color: #1f2937; max-width: 600px; margin: auto; border: 1px solid #e5e7eb; border-top: 6px solid #DF6853; border-radius: 12px;">
-              <h2 style="color: #000000; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px; font-size: 20px;">Sparkles Apartments</h2>
+              <h2 style="color: #000000; border-bottom: 1px solid #e5e7eb; padding-bottom: 10px; font-size: 20px;">Jemmyland Hotels</h2>
               <p style="font-size: 15px; line-height: 1.6;">Hello ${guestName},</p>
               <div style="font-size: 15px; line-height: 1.6; color: #4b5563;">
                 ${broadcastBody.replace(/\{\{guest_name\}\}/g, guestName).replace(/\n/g, '<br/>')}
               </div>
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #e5e7eb; font-size: 11px; color: #9ca3af; text-align: center;">
-                <p>This is a broadcast message from Sparkles Apartments.</p>
+                <p>This is a broadcast message from Jemmyland Hotels.</p>
                 <p>${contactInfo.address} | Phone: ${contactInfo.phone}</p>
               </div>
             </div>
@@ -1317,7 +1317,7 @@ const AdminGuests = () => {
           res = await sendResendEmail({
             to: guest.email,
             subject: broadcastSubject,
-            from: 'info@sparklesapartments.ng',
+            from: 'info@jemmylandhotels.com',
             html: emailHtml
           });
         } else {
@@ -2169,7 +2169,7 @@ const AdminGuests = () => {
                       disabled={broadcastSending}
                       value={broadcastSubject}
                       onChange={e => setBroadcastSubject(e.target.value)}
-                      placeholder="e.g. Exclusive Weekend Treat at Sparkles Apartments"
+                      placeholder="e.g. Exclusive Weekend Treat at Jemmyland Hotels"
                       className="w-full bg-dark-800 border border-dark-700 p-3 rounded-lg text-white text-sm outline-none focus:border-brand-500"
                     />
                   </div>

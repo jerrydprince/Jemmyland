@@ -60,7 +60,7 @@ const FAQ = () => {
       <div className="container mx-auto px-6 max-w-4xl">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-serif text-white mb-4">Frequently Asked Questions</h1>
-          <p className="text-xl text-gray-400">Everything you need to know about your stay at Sparkles Apartments.</p>
+          <p className="text-xl text-gray-400">Everything you need to know about your stay at Jemmyland Hotels.</p>
         </div>
         
         <div className="space-y-4">

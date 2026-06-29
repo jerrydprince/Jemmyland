@@ -1955,7 +1955,7 @@ const AdminStaffManagement = () => {
       const publicKeyOptions = {
         challenge: challenge,
         rp: {
-          name: "Sparkles Apartments PMS",
+          name: "Jemmyland Hotels PMS",
           id: window.location.hostname || "localhost"
         },
         user: {
@@ -2749,7 +2749,7 @@ const AdminStaffManagement = () => {
                           <p className="text-xs text-gray-600">Shift ID: {selectedShiftAudit.id}</p>
                         </div>
                         <div className="text-right">
-                          <h2 className="text-base font-black tracking-widest text-black">SPARKLES APARTMENTS</h2>
+                          <h2 className="text-base font-black tracking-widest text-black">Jemmyland Hotels</h2>
                           <p className="text-xs text-gray-600">Unified Auditing System</p>
                         </div>
                       </div>

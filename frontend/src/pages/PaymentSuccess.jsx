@@ -38,7 +38,7 @@ const PaymentSuccess = () => {
   const [payment, setPayment] = useState(null);
   const [walletBalance, setWalletBalance] = useState(null);
   const [contactInfo, setContactInfo] = useState({
-    address: 'Plot 572 Iduwa Ogenyi Street Mabushi, Off Ahmadu Bello Way, Abuja',
+    address: 'No2. Gowon P Haruna Close, Karu, Abuja',
     logo: ''
   });
 
@@ -223,17 +223,17 @@ const PaymentSuccess = () => {
             <div>
               <div className="flex items-center gap-3">
                 {contactInfo.logo ? (
-                  <img src={contactInfo.logo} alt="Sparkles Apartments Logo" className="max-h-12 object-contain print:max-h-16" />
+                  <img src={contactInfo.logo} alt="Jemmyland Hotels Logo" className="max-h-12 object-contain print:max-h-16" />
                 ) : (
                   <div className="text-gold-500 font-black tracking-widest text-lg uppercase flex items-center gap-2">
                     <ShieldCheck size={20} />
-                    <span>Sparkles Apartments</span>
+                    <span>Jemmyland Hotels</span>
                   </div>
                 )}
               </div>
               {contactInfo.logo && (
                 <div className="text-gold-500 font-black tracking-widest text-sm uppercase mt-1 print:text-black">
-                  Sparkles Apartments
+                  Jemmyland Hotels
                 </div>
               )}
               <p className="text-xs text-gray-500 mt-0.5 print:text-black">{contactInfo.address}</p>
@@ -418,7 +418,7 @@ const PaymentSuccess = () => {
 
           {/* Receipt Footer for Print */}
           <div className="hidden print:block text-center text-[10px] text-gray-500 border-t border-dashed border-gray-700 pt-6 pb-2">
-            Thank you for choosing Sparkles Apartments.<br />
+            Thank you for choosing Jemmyland Hotels.<br />
             This is a computer-generated digital receipt. Secure payment verified via Paystack.
           </div>
 

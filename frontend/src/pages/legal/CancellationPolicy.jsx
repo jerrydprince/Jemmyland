@@ -41,7 +41,7 @@ const CancellationPolicy = () => {
 
           <section>
             <h2 className="text-2xl font-semibold text-white mb-4">5. Extenuating Circumstances</h2>
-            <p>In the event of severe, documented extenuating circumstances (such as medical emergencies or official government travel bans), please contact our support team. Exceptions to this policy are made solely at the discretion of Sparkles Apartments management.</p>
+            <p>In the event of severe, documented extenuating circumstances (such as medical emergencies or official government travel bans), please contact our support team. Exceptions to this policy are made solely at the discretion of Jemmyland Hotels management.</p>
           </section>
           
           <div className="pt-8 border-t border-dark-700 mt-12">

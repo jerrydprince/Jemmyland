@@ -89,9 +89,9 @@ const AdminSettings = () => {
     quickbooks_client_id: '',
     quickbooks_client_secret: '',
     resend_enabled: false,
-    smtp_host: 'mail.sparklesapartments.ng',
+    smtp_host: 'mail.jemmylandhotels.com',
     smtp_port: '465',
-    smtp_username: 'booking@sparklesapartments.ng',
+    smtp_username: 'booking@jemmylandhotels.com',
     smtp_password: '',
     smtp_secure: 'ssl',
     smtp_enabled: true,
@@ -846,6 +846,11 @@ const AdminSettings = () => {
                         <p className="text-xs text-gray-500 mt-1">Separate multiple numbers with commas.</p>
                       </div>
                     </div>
+                    <div className="mt-4">
+                      <label className="block text-sm font-medium text-gray-300 mb-1">WhatsApp Business Number</label>
+                      <input type="text" value={settings.contact_whatsapp || ''} onChange={e => setSettings({...settings, contact_whatsapp: e.target.value})} className="w-full bg-dark-900 text-white border border-dark-700 rounded p-3 focus:border-gold-500 outline-none" placeholder="2348000000000" />
+                      <p className="text-xs text-gray-500 mt-1">Include country code without '+' or spaces. This powers the live WhatsApp floating widget.</p>
+                    </div>
                     <div>
                       <label className="block text-sm font-medium text-gray-300 mb-1">Public Display Address</label>
                       <input type="text" value={settings.contact_address || ''} onChange={e => setSettings({...settings, contact_address: e.target.value})} className="w-full bg-dark-900 text-white border border-dark-700 rounded p-3 focus:border-gold-500 outline-none" required />
@@ -927,7 +932,7 @@ const AdminSettings = () => {
                       const isActive = b.is_active !== false;
                       const manager = b.manager_profile 
                         ? `${b.manager_profile.first_name} ${b.manager_profile.last_name}` 
-                        : (b.name === 'Sparkles Apartments' ? 'Adebayo Johnson' : 
+                        : (b.name === 'Jemmyland Hotels' ? 'Adebayo Johnson' : 
                            b.name === 'Luxe Headquarters' ? 'Amina Yusuf' : 
                            b.name === 'Luxe Victoria Island' ? 'Eze Lawrence' : 'Sarah Connor (Supervisor)');
                       
@@ -1492,7 +1497,7 @@ const AdminSettings = () => {
                               value={settings.smtp_host || ''} 
                               onChange={e => setSettings({...settings, smtp_host: e.target.value})} 
                               className="w-full bg-dark-950 border border-dark-800 text-white rounded-xl py-3 px-4 focus:border-gold-500 outline-none text-sm font-mono" 
-                              placeholder="mail.sparklesapartments.ng" 
+                              placeholder="mail.jemmylandhotels.com" 
                             />
                           </div>
                           
@@ -1514,7 +1519,7 @@ const AdminSettings = () => {
                               value={settings.smtp_username || ''} 
                               onChange={e => setSettings({...settings, smtp_username: e.target.value})} 
                               className="w-full bg-dark-950 border border-dark-800 text-white rounded-xl py-3 px-4 focus:border-gold-500 outline-none text-sm font-mono" 
-                              placeholder="booking@sparklesapartments.ng" 
+                              placeholder="booking@jemmylandhotels.com" 
                             />
                           </div>
 
@@ -1555,7 +1560,7 @@ const AdminSettings = () => {
                                 value={testEmail} 
                                 onChange={e => setTestEmail(e.target.value)} 
                                 className="flex-1 bg-dark-900 border border-dark-800 text-white rounded-lg px-3 py-2 text-xs outline-none focus:border-gold-500" 
-                                placeholder="Enter recipient email (e.g. booking@sparklesapartments.ng)" 
+                                placeholder="Enter recipient email (e.g. booking@jemmylandhotels.com)" 
                               />
                               <button 
                                 type="button" 

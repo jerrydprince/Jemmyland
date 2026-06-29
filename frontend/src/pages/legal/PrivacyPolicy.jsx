@@ -11,7 +11,7 @@ const PrivacyPolicy = () => {
           
           <section>
             <h2 className="text-2xl font-semibold text-white mb-4">1. Introduction</h2>
-            <p>At Sparkles Apartments, we respect your privacy and are committed to protecting your personal data. This Privacy Policy informs you about how we look after your personal data when you visit our website or book our services.</p>
+            <p>At Jemmyland Hotels, we respect your privacy and are committed to protecting your personal data. This Privacy Policy informs you about how we look after your personal data when you visit our website or book our services.</p>
           </section>
 
           <section>

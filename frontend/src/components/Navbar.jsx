@@ -50,24 +50,14 @@ const Navbar = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${showSolid ? 'bg-dark-900/95 backdrop-blur-md py-4 shadow-lg' : 'bg-transparent py-6'}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${showSolid ? 'bg-[#4c5c54]/50 backdrop-blur-md py-4 shadow-lg' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <Link to="/" className="flex items-center gap-3">
-          {contactLogo ? (
-            <img src={contactLogo} alt="Logo" className="h-10 max-w-[180px] object-contain" />
-          ) : (
-            <>
-              <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 10 L10 90 L35 90 L60 40 Z" fill="#DF6853"/>
-                <path d="M40 90 L90 90 L75 60 L50 90 Z" fill="#DF6853"/>
-                <path d="M25 15 L28 25 L38 28 L28 31 L25 41 L22 31 L12 28 L22 25 Z" fill="#DF6853"/>
-              </svg>
-              <div className="flex flex-col justify-center">
-                <span className={`text-[22px] font-sans font-extrabold leading-none tracking-wide transition-colors duration-300 ${showSolid ? 'text-[#4A4A4A] dark:text-white' : 'text-[#ffffff]'}`}>SPARKLES</span>
-                <span className={`text-[11px] font-sans leading-tight tracking-[0.25em] mt-1 transition-colors duration-300 ${showSolid ? 'text-[#6B7280] dark:text-gray-400' : 'text-[#ffffff]/85'}`}>APARTMENTS</span>
-              </div>
-            </>
-          )}
+        <Link to="/" className="flex items-center gap-3 mr-auto hover:opacity-80 transition-opacity">
+          <img src="/Images/logo.png.png" alt="Jemmyland Hotels Logo" className="h-10 object-contain" />
+          <div className="flex flex-col justify-center ml-2">
+            <span className={`text-[22px] font-sans font-extrabold leading-none tracking-wide transition-colors duration-300 ${showSolid ? 'text-brand-600 dark:text-brand-400' : 'text-[#ffffff]'}`}>JEMMYLAND</span>
+            <span className={`text-[11px] font-sans leading-tight tracking-[0.25em] mt-1 transition-colors duration-300 ${showSolid ? 'text-gray-500 dark:text-gray-400' : 'text-[#ffffff]/85'}`}>HOTELS</span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}

@@ -35,9 +35,9 @@ const AdminReservations = ({ onUpdate, isFrontOfficeClosed }) => {
   });
   const [transferBooking, setTransferBooking] = useState(null);
   const [contactInfo, setContactInfo] = useState({
-    address: '123 Luxury Avenue, Victoria Island, Lagos, Nigeria',
-    phone: '+234 800 LUXE APT',
-    email: 'reservations@luxe.com'
+    address: 'No2. Gowon P Haruna Close, Karu, Abuja',
+    phone: '08103694837, 08174971881',
+    email: 'info@jemmylandhotels.com'
   });
 
   useEffect(() => {
@@ -448,7 +448,7 @@ const AdminReservations = ({ onUpdate, isFrontOfficeClosed }) => {
             <p className="text-gray-600 text-xs">Ref: {viewBooking.booking_reference || 'N/A'}</p>
           </div>
           <div className="text-right">
-            <h2 className="text-lg font-black tracking-widest text-black" style={{ color: '#000000' }}>SPARKLES APARTMENTS</h2>
+            <h2 className="text-lg font-black tracking-widest text-black" style={{ color: '#000000' }}>Jemmyland Hotels</h2>
             <p className="text-xs text-gray-600">{contactInfo.address}</p>
             <p className="text-xs text-gray-600">{contactInfo.phone}</p>
             <p className="text-xs text-gray-600">{contactInfo.email}</p>
@@ -657,7 +657,7 @@ const AdminReservations = ({ onUpdate, isFrontOfficeClosed }) => {
         </div>
 
         <div className="mt-16 text-center text-[10px] text-gray-400 border-t pt-4">
-          <p>Thank you for choosing Sparkles Apartments. Have a wonderful stay!</p>
+          <p>Thank you for choosing Jemmyland Hotels. Have a wonderful stay!</p>
         </div>
       </div>
     );

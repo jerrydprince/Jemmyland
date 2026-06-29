@@ -158,9 +158,9 @@ app.post('/api/email/send', async (req, res) => {
 
     // 2. If SMTP (cPanel Webmail) is enabled, route via Nodemailer SMTP
     if (smtpEnabled) {
-      const host = process.env.SMTP_HOST || settingsMap.smtp_host || 'mail.sparklesapartments.ng';
+      const host = process.env.SMTP_HOST || settingsMap.smtp_host || 'mail.jemmylandhotels.com';
       const port = parseInt(process.env.SMTP_PORT || settingsMap.smtp_port || '465', 10);
-      const username = process.env.SMTP_USERNAME || settingsMap.smtp_username || 'info@sparklesapartments.ng';
+      const username = process.env.SMTP_USERNAME || settingsMap.smtp_username || 'info@jemmylandhotels.com';
       const password = process.env.SMTP_PASSWORD || settingsMap.smtp_password || '';
       const secure = (process.env.SMTP_SECURE === 'ssl') || settingsMap.smtp_secure === 'ssl' || port === 465;
 
@@ -178,15 +178,24 @@ app.post('/api/email/send', async (req, res) => {
       });
 
       // Force from address dynamically based on env or fallback
-      const fromName = process.env.SMTP_FROM_NAME || 'Sparkles Apartments';
+      const fromName = process.env.SMTP_FROM_NAME || 'Jemmyland Hotels';
       const fromAddress = process.env.SMTP_FROM_ADDRESS || username;
       const smtpFrom = `${fromName} <${fromAddress}>`;
+
+      // Replace frontend logo URL with CID for inline email rendering
+      let processedHtml = html.replace(/https?:\/\/[^\/]+\/Images\/logo\.png\.png/g, 'cid:logo');
+      processedHtml = processedHtml.replace(/\/Images\/logo\.png\.png/g, 'cid:logo');
 
       const mailOptions = {
         from: smtpFrom,
         to,
         subject,
-        html
+        html: processedHtml,
+        attachments: [{
+          filename: 'logo.png',
+          path: '../frontend/public/Images/logo.png.png',
+          cid: 'logo'
+        }]
       };
 
       console.log(`[SMTP Backend] Dispatching email to: ${to} via cPanel SMTP (${host}:${port}) from ${smtpFrom}...`);
@@ -202,7 +211,7 @@ app.post('/api/email/send', async (req, res) => {
       return res.status(500).json({ error: 'Neither SMTP nor Resend API key is configured.' });
     }
 
-    const fromAddress = from ? `Sparkles Apartments <${from}>` : 'Sparkles Apartments <onboarding@resend.dev>';
+    const fromAddress = from ? `Jemmyland Hotels <${from}>` : 'Jemmyland Hotels <onboarding@resend.dev>';
     console.log(`[Resend Backend] Dispatching email to: ${to} via Resend...`);
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -247,9 +256,9 @@ async function sendAuthEmailInternal({ to, subject, html }) {
     const smtpEnabled = envSmtpEnabled || settingsMap.smtp_enabled === 'true' || settingsMap.smtp_enabled === true;
 
     if (smtpEnabled) {
-      const host = process.env.SMTP_HOST || settingsMap.smtp_host || 'mail.sparklesapartments.ng';
+      const host = process.env.SMTP_HOST || settingsMap.smtp_host || 'mail.jemmylandhotels.com';
       const port = parseInt(process.env.SMTP_PORT || settingsMap.smtp_port || '465', 10);
-      const username = process.env.SMTP_USERNAME || settingsMap.smtp_username || 'info@sparklesapartments.ng';
+      const username = process.env.SMTP_USERNAME || settingsMap.smtp_username || 'info@jemmylandhotels.com';
       const password = process.env.SMTP_PASSWORD || settingsMap.smtp_password || '';
       const secure = (process.env.SMTP_SECURE === 'ssl') || settingsMap.smtp_secure === 'ssl' || port === 465;
 
@@ -261,7 +270,7 @@ async function sendAuthEmailInternal({ to, subject, html }) {
         tls: { rejectUnauthorized: false }
       });
 
-      const fromName = process.env.SMTP_FROM_NAME || 'Sparkles Apartments';
+      const fromName = process.env.SMTP_FROM_NAME || 'Jemmyland Hotels';
       const fromAddress = process.env.SMTP_FROM_ADDRESS || username;
       const smtpFrom = `${fromName} <${fromAddress}>`;
       
@@ -280,7 +289,7 @@ async function sendAuthEmailInternal({ to, subject, html }) {
       throw new Error('Neither SMTP nor Resend API key is configured.');
     }
 
-    const fromAddress = 'Sparkles Apartments <info@sparklesapartments.ng>';
+    const fromAddress = 'Jemmyland Hotels <info@jemmylandhotels.com>';
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -357,8 +366,8 @@ app.post('/api/auth/forgot-password', async (req, res) => {
     const htmlContent = `
       <div style="font-family: 'Outfit', sans-serif; padding: 40px; color: #1f2937; max-width: 600px; margin: auto; border: 1px solid #e5e7eb; border-top: 8px solid #DF6853; border-radius: 16px; background-color: #ffffff;">
         <div style="text-align: center; border-bottom: 1px solid #f3f4f6; padding-bottom: 25px; margin-bottom: 25px;">
-          <h2 style="color: #000000; margin: 0; font-size: 26px; font-weight: 800; letter-spacing: 0.05em;">SPARKLES APARTMENTS</h2>
-          <span style="font-size: 11px; color: #DF6853; text-transform: uppercase; letter-spacing: 0.15em; font-weight: bold;">Premium Luxury Shortlets</span>
+          <h2 style="color: #000000; margin: 0; font-size: 26px; font-weight: 800; letter-spacing: 0.05em;">Jemmyland Hotels</h2>
+          <span style="font-size: 11px; color: #DF6853; text-transform: uppercase; letter-spacing: 0.15em; font-weight: bold;">Premium Luxury Hotel</span>
         </div>
         
         <div style="margin-bottom: 30px;">
@@ -367,7 +376,7 @@ app.post('/api/auth/forgot-password', async (req, res) => {
             Dear <strong>${profile.first_name || 'Guest'}</strong>,
           </p>
           <p style="font-size: 14px; line-height: 1.6; color: #4b5563; margin-top: 10px;">
-            We received a request to reset your password for your Sparkles Apartments account. Please click the button below to choose a new password. This link is secure and valid for 1 hour.
+            We received a request to reset your password for your Jemmyland Hotels account. Please click the button below to choose a new password. This link is secure and valid for 1 hour.
           </p>
         </div>
 
@@ -389,7 +398,7 @@ app.post('/api/auth/forgot-password', async (req, res) => {
 
     await sendAuthEmailInternal({
       to: cleanEmail,
-      subject: 'Reset Password Request - Sparkles Apartments',
+      subject: 'Reset Password Request - Jemmyland Hotels',
       html: htmlContent
     });
 

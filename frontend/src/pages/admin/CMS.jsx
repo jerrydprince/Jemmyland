@@ -35,7 +35,7 @@ const AdminCMS = () => {
   // --- FRONTEND CONTENT STATE ---
   const [frontendContent, setFrontendContent] = useState({
     cms_home_hero_title: 'Experience True Luxury',
-    cms_home_hero_subtitle: 'Elevate your stay in the heart of the city with our premium shortlets.',
+    cms_home_hero_subtitle: 'Elevate your stay in the heart of the city with our premium hotel.',
     cms_home_hero_bg_1: '',
     cms_home_about_title: 'Redefining the standard of luxury living.',
     cms_home_about_text_1: 'Nestled in the most prestigious neighborhood, Luxe offers an unparalleled living experience.',

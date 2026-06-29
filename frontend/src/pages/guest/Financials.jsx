@@ -25,14 +25,14 @@ const GuestFinancials = () => {
 
   const [bankDetails, setBankDetails] = useState({
     bankName: 'Access Bank Plc',
-    accountName: 'Sparkles Apartments Ltd',
+    accountName: 'Jemmyland Hotels Ltd',
     accountNumber: '0098172635'
   });
 
   const [contactInfo, setContactInfo] = useState({
-    address: 'Plot 572 Iduwa Ogenyi Street Mabushi, Off Ahmadu Bello Way, Abuja',
+    address: 'No2. Gowon P Haruna Close, Karu, Abuja',
     phone: '08033214684, 08062332639, 08171278657',
-    email: 'info@sparklesapartments.ng',
+    email: 'info@jemmylandhotels.com',
     logo: ''
   });
 
@@ -72,7 +72,7 @@ const GuestFinancials = () => {
         }, {});
         setBankDetails({
           bankName: settingsMap.hotel_bank_name || 'Access Bank Plc',
-          accountName: settingsMap.hotel_account_name || 'Sparkles Apartments Ltd',
+          accountName: settingsMap.hotel_account_name || 'Jemmyland Hotels Ltd',
           accountNumber: settingsMap.hotel_account_number || '0098172635'
         });
       }
@@ -612,7 +612,7 @@ const GuestFinancials = () => {
           </table>
           
           <div class="footer">
-            Thank you for choosing Sparkles Apartments.<br />
+            Thank you for choosing Jemmyland Hotels.<br />
             For support or billing inquiries, please contact ${contactInfo.email}.
           </div>
         </body>

@@ -30,7 +30,7 @@ const LostFound = () => {
   
   // Dynamic contact details from system_settings
   const [systemSettings, setSystemSettings] = useState({
-    contact_phone: '+234 800 LUXE APT',
+    contact_phone: '08103694837, 08174971881',
     contact_email: 'info@sparklesapartments.com'
   });
 
@@ -344,10 +344,10 @@ const LostFound = () => {
     const guestPhone = item.bookings?.guest_phone || item.bookings?.profiles?.phone || '';
     const roomNum = item.rooms?.room_number || 'your stay suite';
     
-    const phone = systemSettings.contact_phone || '+234 800 LUXE APT';
+    const phone = systemSettings.contact_phone || '08103694837, 08174971881';
     const email = systemSettings.contact_email || 'info@sparklesapartments.com';
-    const subject = `Sparkles Apartments - Found Property Notification (Room ${roomNum})`;
-    const message = `Dear ${guestName},\n\nWe hope you had a wonderful stay with us at Sparkles Apartments.\n\nOur housekeeping team found a "${item.item_name}" (${item.description || 'no extra description details'}) left in Room ${roomNum} shortly after your departure.\n\nPlease contact our Front Office desk at ${phone} or email us at ${email} to arrange collection or delivery of your item.\n\nWarm regards,\nFront Office Operations\nSparkles Apartments`;
+    const subject = `Jemmyland Hotels - Found Property Notification (Room ${roomNum})`;
+    const message = `Dear ${guestName},\n\nWe hope you had a wonderful stay with us at Jemmyland Hotels.\n\nOur housekeeping team found a "${item.item_name}" (${item.description || 'no extra description details'}) left in Room ${roomNum} shortly after your departure.\n\nPlease contact our Front Office desk at ${phone} or email us at ${email} to arrange collection or delivery of your item.\n\nWarm regards,\nFront Office Operations\nJemmyland Hotels`;
 
     setNotificationData({
       channel: 'email',
@@ -403,7 +403,7 @@ const LostFound = () => {
               subject: notificationData.subject,
               html: `<div style="font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden;">
                 <div style="background-color: #0f172a; padding: 24px; text-align: center; border-bottom: 2px solid #0d9488;">
-                  <h1 style="color: #ffffff; margin: 0; font-size: 20px; font-weight: bold; letter-spacing: 0.05em;">SPARKLES APARTMENTS</h1>
+                  <h1 style="color: #ffffff; margin: 0; font-size: 20px; font-weight: bold; letter-spacing: 0.05em;">Jemmyland Hotels</h1>
                 </div>
                 <div style="padding: 32px; background-color: #ffffff;">
                   <h2 style="color: #0d9488; margin-top: 0; font-size: 18px;">Found Property Alert</h2>

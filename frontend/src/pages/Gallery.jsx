@@ -52,7 +52,7 @@ const Gallery = () => {
       <div className="container mx-auto px-6 py-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-center text-white">Our Gallery</h1>
         <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-          Explore the stunning details and premium spaces of Sparkles Apartments. Click any image to view a larger magnification.
+          Explore the stunning details and premium spaces of Jemmyland Hotels. Click any image to view a larger magnification.
         </p>
         
         {loading ? (

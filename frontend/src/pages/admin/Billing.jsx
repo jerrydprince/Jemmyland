@@ -128,9 +128,9 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
   const [fetchError, setFetchError] = useState(null);
   const [printType, setPrintType] = useState('a4'); // a4 or thermal
   const [contactInfo, setContactInfo] = useState({
-    address: 'Plot 572 Iduwa Ogenyi Street Mabushi, Off Ahmadu Bello Way, Abuja',
+    address: 'No2. Gowon P Haruna Close, Karu, Abuja',
     phone: '08033214684, 08062332639, 08171278657',
-    email: 'info@sparklesapartments.ng',
+    email: 'info@jemmylandhotels.com',
     logo: ''
   });
 
@@ -574,8 +574,8 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
               </head>
               <body>
                 <div class="header">
-                  <h1>SPARKLES APARTMENTS</h1>
-                  <p>Premium Luxury Shortlets</p>
+                  <h1>Jemmyland Hotels</h1>
+                  <p>Premium Luxury Hotel</p>
                 </div>
                 <p class="title">Hall Booking Receipt</p>
                 <table>
@@ -591,7 +591,7 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
                 </table>
                 <div class="amount">₦${amountToPay.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
                 <div class="footer">
-                  <p>Authorized and confirmed by Sparkles Apartments Finance Department.</p>
+                  <p>Authorized and confirmed by Jemmyland Hotels Finance Department.</p>
                 </div>
               </body>
             </html>
@@ -761,8 +761,8 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
               </head>
               <body>
                 <div class="header">
-                  <h1>SPARKLES APARTMENTS</h1>
-                  <p>Premium Luxury Shortlets</p>
+                  <h1>Jemmyland Hotels</h1>
+                  <p>Premium Luxury Hotel</p>
                 </div>
                 <p class="title">Payment Receipt</p>
                 <table>
@@ -775,7 +775,7 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
                 </table>
                 <div class="amount">₦${Number(reminder.amount_ngn || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
                 <div class="footer">
-                  <p>Authorized and confirmed by Sparkles Apartments Finance Department.</p>
+                  <p>Authorized and confirmed by Jemmyland Hotels Finance Department.</p>
                   ${reminder.recurrence !== 'none' ? '<p style="color: #f59e0b; font-weight: bold;">Next recurrence reminder has been automatically scheduled.</p>' : ''}
                 </div>
               </body>
@@ -851,9 +851,9 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
           const receiptHtml = `
             <div style="font-family: 'Outfit', sans-serif; padding: 40px; color: #1f2937; max-width: 600px; margin: auto; border: 1px solid #e5e7eb; border-top: 8px solid #DF6853; border-radius: 16px; background-color: #ffffff;">
               <div style="text-align: center; border-bottom: 1px solid #f3f4f6; padding-bottom: 25px; margin-bottom: 25px;">
-                ${contactInfo.logo ? `<img src="${contactInfo.logo}" alt="Sparkles Apartments" style="max-height: 50px; object-fit: contain; margin-bottom: 8px; border-radius: 4px;" />` : ''}
-                <h2 style="color: #000000; margin: 0; font-size: 26px; font-weight: 800; letter-spacing: 0.05em;">SPARKLES APARTMENTS</h2>
-                <span style="font-size: 11px; color: #DF6853; text-transform: uppercase; letter-spacing: 0.15em; font-weight: bold;">Premium Luxury Shortlets</span>
+                ${contactInfo.logo ? `<img src="${contactInfo.logo}" alt="Jemmyland Hotels" style="max-height: 50px; object-fit: contain; margin-bottom: 8px; border-radius: 4px;" />` : ''}
+                <h2 style="color: #000000; margin: 0; font-size: 26px; font-weight: 800; letter-spacing: 0.05em;">Jemmyland Hotels</h2>
+                <span style="font-size: 11px; color: #DF6853; text-transform: uppercase; letter-spacing: 0.15em; font-weight: bold;">Premium Luxury Hotel</span>
               </div>
               
               <div style="margin-bottom: 30px;">
@@ -862,7 +862,7 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
                   Dear <strong>${payout.professional?.name || 'Partner'}</strong>,
                 </p>
                 <p style="font-size: 14px; line-height: 1.6; color: #4b5563; margin-top: 10px; margin-bottom: 0;">
-                  This is to confirm that a payout of <strong>₦${Number(payout.amount_ngn).toLocaleString(undefined, {minimumFractionDigits: 2})}</strong> has been successfully processed for the maintenance services carried out at Sparkles Apartments.
+                  This is to confirm that a payout of <strong>₦${Number(payout.amount_ngn).toLocaleString(undefined, {minimumFractionDigits: 2})}</strong> has been successfully processed for the maintenance services carried out at Jemmyland Hotels.
                 </p>
               </div>
 
@@ -918,7 +918,7 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
               ` : ''}
 
               <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f3f4f6; text-align: center; font-size: 12px; color: #9ca3af;">
-                <p style="margin: 0 0 5px 0;">This is an official automated disbursement confirmation from Sparkles Apartments.</p>
+                <p style="margin: 0 0 5px 0;">This is an official automated disbursement confirmation from Jemmyland Hotels.</p>
                 <p style="margin: 0;">${contactInfo.address}</p>
                 <p style="margin: 5px 0 0 0;">Phones: ${contactInfo.phone} | Email: ${contactInfo.email}</p>
               </div>
@@ -927,8 +927,8 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
 
           const emailRes = await sendResendEmail({
             to: specialistEmail,
-            subject: `Payment Receipt: ₦${Number(payout.amount_ngn).toLocaleString()} - Sparkles Apartments`,
-            from: 'booking@sparklesapartments.ng',
+            subject: `Payment Receipt: ₦${Number(payout.amount_ngn).toLocaleString()} - Jemmyland Hotels`,
+            from: 'booking@jemmylandhotels.com',
             html: receiptHtml
           });
           
@@ -993,8 +993,8 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
         try {
           const emailRes = await sendResendEmail({
             to: specialistEmail,
-            subject: `Payment Receipt: ₦${Number(payout.amount_ngn).toLocaleString()} - Sparkles Apartments`,
-            from: 'booking@sparklesapartments.ng',
+            subject: `Payment Receipt: ₦${Number(payout.amount_ngn).toLocaleString()} - Jemmyland Hotels`,
+            from: 'booking@jemmylandhotels.com',
             html: `<p>Payment of ₦${Number(payout.amount_ngn).toLocaleString()} received successfully for maintenance!</p>`
           });
           if (emailRes?.success) emailSent = true;
@@ -1620,7 +1620,7 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
 
       setManagerPhoneDisplay(managerPhone);
 
-      const smsMessage = `Sparkles Apartments: Security OTP code for Refund Auth is ${code}. Invoice Ref: ${activeRefundModal.invoice_number}, Amount: ₦${Number(paymentAmount).toLocaleString()}. Valid for 5 minutes.`;
+      const smsMessage = `Jemmyland Hotels: Security OTP code for Refund Auth is ${code}. Invoice Ref: ${activeRefundModal.invoice_number}, Amount: ₦${Number(paymentAmount).toLocaleString()}. Valid for 5 minutes.`;
       
       const res = await sendSMSNotification({
         to: managerPhone,
@@ -1699,7 +1699,7 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
     printWindow.document.write(`
       <html>
         <head>
-          <title>Refund Settlements Bank Report - Sparkles Apartments</title>
+          <title>Refund Settlements Bank Report - Jemmyland Hotels</title>
           <style>
             @page { size: landscape; margin: 20mm; }
             body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; padding: 20px; color: #111827; }
@@ -1720,7 +1720,7 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
           
           <div class="meta">
             <div>
-              <strong>Sparkles Apartments Premium Luxury Shortlets</strong><br />
+              <strong>Jemmyland Hotels Premium Luxury Hotel</strong><br />
               Compiled Date: ${new Date().toLocaleString()}<br />
               Total Records: ${filtered.length}
             </div>
@@ -3031,7 +3031,7 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
               <div className="text-right">
                 <div className="flex flex-col justify-center items-end">
                   {contactInfo.logo ? (
-                    <img src={contactInfo.logo} alt="Sparkles Apartments Logo" className="max-h-12 object-contain print:max-h-16 mb-2" />
+                    <img src={contactInfo.logo} alt="Jemmyland Hotels Logo" className="max-h-12 object-contain print:max-h-16 mb-2" />
                   ) : (
                     <>
                       <span className="text-[20px] font-sans font-extrabold text-white print:text-black leading-none tracking-wide">SPARKLES</span>
@@ -3320,7 +3320,7 @@ const AdminBilling = ({ isFrontOfficeClosed }) => {
             </div>
 
             <div className="mt-16 text-center text-xs text-gray-400 print:text-gray-500 border-t border-dark-700 print:border-gray-200 pt-4">
-              <p>Thank you for choosing Sparkles Apartments.</p>
+              <p>Thank you for choosing Jemmyland Hotels.</p>
               <p>Payment is due by the specified due date. Late payments may incur additional fees.</p>
             </div>
           </div>

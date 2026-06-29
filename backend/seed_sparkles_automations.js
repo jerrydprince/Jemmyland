@@ -8,10 +8,10 @@ const templates = [
   {
     name: 'Welcome Email',
     channel: 'email',
-    subject: 'Your Booking Details - Sparkles Apartments',
+    subject: 'Your Booking Details - Jemmyland Hotels',
     body: `Dear {{guest_name}},
 
-Thank you for choosing Sparkles Apartments! We are delighted to confirm your booking.
+Thank you for choosing Jemmyland Hotels! We are delighted to confirm your booking.
 
 Booking Details:
 - Booking Reference: {{booking_ref}}
@@ -26,12 +26,12 @@ If you have any questions or need to make changes to your booking, please don't 
 We look forward to welcoming you!
 
 Warm regards,
-The Sparkles Apartments Team`
+The Jemmyland Hotels Team`
   },
   {
     name: 'Booking Confirmed Email',
     channel: 'email',
-    subject: 'Booking Confirmed - {{booking_ref}} - Sparkles Apartments',
+    subject: 'Booking Confirmed - {{booking_ref}} - Jemmyland Hotels',
     body: `Dear {{guest_name}},
 
 Your booking {{booking_ref}} has been successfully confirmed.
@@ -44,12 +44,12 @@ Stay Details:
 We are preparing everything for your arrival. Please let us know if you have any special requests.
 
 Best regards,
-Sparkles Apartments Desk`
+Jemmyland Hotels Desk`
   },
   {
     name: 'Booking Cancelled Email',
     channel: 'email',
-    subject: 'Booking Cancelled - {{booking_ref}} - Sparkles Apartments',
+    subject: 'Booking Cancelled - {{booking_ref}} - Jemmyland Hotels',
     body: `Dear {{guest_name}},
 
 This email confirms that your booking {{booking_ref}} has been cancelled.
@@ -62,15 +62,15 @@ Cancellation Details:
 If this cancellation was made in error or you would like to reschedule, please reach out to our team immediately.
 
 Sincerely,
-Sparkles Apartments Team`
+Jemmyland Hotels Team`
   },
   {
     name: 'Check-in Confirmation Email',
     channel: 'email',
-    subject: 'Welcome to Sparkles Apartments! Checked-in successfully - {{booking_ref}}',
+    subject: 'Welcome to Jemmyland Hotels! Checked-in successfully - {{booking_ref}}',
     body: `Dear {{guest_name}},
 
-Welcome to Sparkles Apartments! You have been checked in successfully.
+Welcome to Jemmyland Hotels! You have been checked in successfully.
 
 Your Room: Room {{room_number}} ({{room_details}})
 Check-out Date: {{check_out}} (by 11:00 AM)
@@ -88,10 +88,10 @@ Front Desk Operations`
   {
     name: 'Checkout Summary Email',
     channel: 'email',
-    subject: 'Thank you for staying at Sparkles Apartments - {{booking_ref}}',
+    subject: 'Thank you for staying at Jemmyland Hotels - {{booking_ref}}',
     body: `Dear {{guest_name}},
 
-Thank you for choosing Sparkles Apartments. We hope you enjoyed your stay!
+Thank you for choosing Jemmyland Hotels. We hope you enjoyed your stay!
 
 Your booking has been checked out, and your stay ledger is now settled.
 
@@ -105,12 +105,12 @@ Checkout Details:
 A copy of your final receipt is attached or available in your guest account. Safe travels and we hope to host you again soon!
 
 Sincerely,
-The Sparkles Apartments Team`
+The Jemmyland Hotels Team`
   },
   {
     name: 'Payment Receipt Email',
     channel: 'email',
-    subject: 'Payment Receipt - {{payment_ref}} - Sparkles Apartments',
+    subject: 'Payment Receipt - {{payment_ref}} - Jemmyland Hotels',
     body: `Dear {{guest_name}},
 
 Thank you for your payment. We have successfully processed the following transaction:
@@ -127,15 +127,15 @@ Current Balance: NGN {{balance_due}}
 Thank you for your business.
 
 Best regards,
-Finance Department, Sparkles Apartments`
+Finance Department, Jemmyland Hotels`
   },
   {
     name: 'Booking Invoice Email',
     channel: 'email',
-    subject: 'Invoice Issued - {{invoice_number}} - Sparkles Apartments',
+    subject: 'Invoice Issued - {{invoice_number}} - Jemmyland Hotels',
     body: `Dear {{guest_name}},
 
-Please find below the invoice details for your stay at Sparkles Apartments:
+Please find below the invoice details for your stay at Jemmyland Hotels:
 
 Invoice Summary:
 - Invoice Number: {{invoice_number}}
@@ -149,16 +149,16 @@ Invoice Summary:
 
 If you have any billing queries, please reply directly to this email.
 
-Thank you for choosing Sparkles Apartments.
+Thank you for choosing Jemmyland Hotels.
 
 Sincerely,
-Accounts Department, Sparkles Apartments`
+Accounts Department, Jemmyland Hotels`
   },
   {
     name: 'Check-in Reminder (SMS)',
     channel: 'sms',
     subject: null,
-    body: 'Hi {{guest_name}}, your stay at Sparkles Apartments begins tomorrow! Check-in is at 2:00 PM. See you soon!'
+    body: 'Hi {{guest_name}}, your stay at Jemmyland Hotels begins tomorrow! Check-in is at 2:00 PM. See you soon!'
   },
   {
     name: 'Checkout Reminder (SMS)',
@@ -170,7 +170,7 @@ Accounts Department, Sparkles Apartments`
     name: 'Appreciation (SMS)',
     channel: 'sms',
     subject: null,
-    body: 'Dear {{guest_name}}, thank you for staying at Sparkles Apartments. We appreciate your patronage and hope to host you again soon!'
+    body: 'Dear {{guest_name}}, thank you for staying at Jemmyland Hotels. We appreciate your patronage and hope to host you again soon!'
   }
 ];
 

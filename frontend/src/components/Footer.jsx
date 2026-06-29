@@ -5,9 +5,9 @@ import { supabase } from '../lib/supabase';
 
 const Footer = () => {
   const [contactInfo, setContactInfo] = useState({
-    address: '123 Luxury Avenue, Victoria Island, Lagos, Nigeria', // Default fallback
-    phone: '+234 800 LUXE APT',
-    email: 'reservations@luxe.com'
+    address: 'No2. Gowon P Haruna Close, Karu, Abuja', // Default fallback
+    phone: '08103694837, 08174971881',
+    email: 'info@jemmylandhotels.com'
   });
 
   useEffect(() => {
@@ -45,18 +45,16 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-3 mb-6 inline-flex">
-              <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M50 10 L10 90 L35 90 L60 40 Z" fill="#DF6853"/>
-                <path d="M40 90 L90 90 L75 60 L50 90 Z" fill="#DF6853"/>
-                <path d="M25 15 L28 25 L38 28 L28 31 L25 41 L22 31 L12 28 L22 25 Z" fill="#DF6853"/>
-              </svg>
-              <div className="flex flex-col justify-center">
-                <span className="text-[22px] font-sans font-extrabold text-[#4A4A4A] leading-none tracking-wide">SPARKLES</span>
-                <span className="text-[11px] font-sans text-[#6B7280] leading-tight tracking-[0.25em] mt-1">APARTMENTS</span>
-              </div>
+              <>
+                <img src="/Images/logo.png.png" alt="Jemmyland Hotels Logo" className="h-10 object-contain" />
+                <div className="flex flex-col justify-center ml-2">
+                  <span className="text-[20px] font-sans font-extrabold leading-none tracking-wide text-white">JEMMYLAND</span>
+                  <span className="text-[10px] font-sans leading-tight tracking-[0.25em] mt-1 text-brand-500">HOTELS</span>
+                </div>
+              </>
             </Link>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Experience unparalleled luxury and comfort in our premium shortlet apartments designed for the elite.
+              Experience unparalleled luxury and comfort in our premium hotel apartments designed for the elite.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="w-10 h-10 rounded-full bg-dark-800 flex items-center justify-center text-gray-400 hover:bg-gold-500 hover:text-dark-900 transition-colors">
@@ -117,7 +115,7 @@ const Footer = () => {
 
         <div className="border-t border-dark-700 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Sparkles Apartments. All rights reserved.
+            &copy; {new Date().getFullYear()} Jemmyland Hotels. All rights reserved.
           </p>
           <div className="flex space-x-4">
             <span className="text-gray-500 text-sm font-medium">Secured by Paystack</span>

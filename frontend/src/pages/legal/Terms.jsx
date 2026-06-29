@@ -11,7 +11,7 @@ const Terms = () => {
           
           <section>
             <h2 className="text-2xl font-semibold text-white mb-4">1. Introduction</h2>
-            <p>Welcome to Sparkles Apartments. By booking an accommodation with us, you agree to be bound by these Terms and Conditions. Please read them carefully before proceeding with your reservation.</p>
+            <p>Welcome to Jemmyland Hotels. By booking an accommodation with us, you agree to be bound by these Terms and Conditions. Please read them carefully before proceeding with your reservation.</p>
           </section>
 
           <section>
@@ -41,7 +41,7 @@ const Terms = () => {
 
           <section>
             <h2 className="text-2xl font-semibold text-white mb-4">6. Liability</h2>
-            <p>Sparkles Apartments is not liable for any loss, damage, or injury sustained by guests or their property during their stay. We strongly recommend comprehensive travel insurance.</p>
+            <p>Jemmyland Hotels is not liable for any loss, damage, or injury sustained by guests or their property during their stay. We strongly recommend comprehensive travel insurance.</p>
           </section>
 
           <section>

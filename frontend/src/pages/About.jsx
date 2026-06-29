@@ -82,7 +82,7 @@ const About = () => {
               <h4 className="text-gold-500 font-medium tracking-widest uppercase mb-4">The Vision</h4>
               <h2 className="text-4xl md:text-5xl font-bold mb-8 leading-tight">{cmsContent.cms_about_vision_title || "Elevating the standard of modern hospitality."}</h2>
               <div className="space-y-6 text-gray-400 text-lg leading-relaxed">
-                <p>{cmsContent.cms_about_vision_text_1 || "Welcome to Luxe Apartments, where we redefine the art of fine living. Located in the heart of the city's most exclusive district, our shortlet apartments are designed for those who appreciate the finer things in life."}</p>
+                <p>{cmsContent.cms_about_vision_text_1 || "Welcome to Luxe Apartments, where we redefine the art of fine living. Located in the heart of the city's most exclusive district, our hotel apartments are designed for those who appreciate the finer things in life."}</p>
                 <p>{cmsContent.cms_about_vision_text_2 || "Our journey began with a simple yet ambitious goal: to provide an unparalleled experience that perfectly combines the comfort of a luxury private home with the premium, uncompromising services of a five-star hotel."}</p>
                 <p>{cmsContent.cms_about_vision_text_3 || "Every detail, from the bespoke furnishings, curated art pieces, to the state-of-the-art smart home amenities, has been meticulously selected by award-winning interior designers to ensure your stay is nothing short of absolute perfection."}</p>
               </div>
@@ -107,7 +107,7 @@ const About = () => {
               ) : (
                 <div className="w-full h-72 rounded-sm bg-dark-800 border border-dark-700 flex flex-col items-center justify-center p-6 text-center shadow-2xl">
                   <span className="text-gold-500 font-bold uppercase tracking-widest text-xs">Unmatched Comfort</span>
-                  <p className="text-gray-500 text-[10px] mt-2">Redefining luxury shortlets</p>
+                  <p className="text-gray-500 text-[10px] mt-2">Redefining luxury hotel</p>
                 </div>
               )}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold-500 text-dark-900 p-8 text-center shadow-2xl z-10 w-48">

@@ -22,9 +22,9 @@ const POS = () => {
   const [loading, setLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
   const [contactInfo, setContactInfo] = useState({
-    address: 'Plot 572 Iduwa Ogenyi Street Mabushi, Off Ahmadu Bello Way, Abuja',
+    address: 'No2. Gowon P Haruna Close, Karu, Abuja',
     phone: '08033214684, 08062332639, 08171278657',
-    email: 'info@sparklesapartments.ng',
+    email: 'info@jemmylandhotels.com',
     logo: ''
   });
   
@@ -1547,9 +1547,9 @@ const POS = () => {
               {/* Receipt Header */}
               <div className="text-center border-b border-dashed border-gray-400 pb-3 mb-3 flex flex-col items-center">
                 {contactInfo.logo && (
-                  <img src={contactInfo.logo} alt="Sparkles Apartments Logo" className="max-h-8 object-contain mb-1.5" style={{ filter: 'grayscale(100%) contrast(150%)' }} />
+                  <img src={contactInfo.logo} alt="Jemmyland Hotels Logo" className="max-h-8 object-contain mb-1.5" style={{ filter: 'grayscale(100%) contrast(150%)' }} />
                 )}
-                <h2 className="text-lg font-black tracking-wider uppercase m-0" style={{ color: '#000000' }}>SPARKLES APARTMENTS</h2>
+                <h2 className="text-lg font-black tracking-wider uppercase m-0" style={{ color: '#000000' }}>Jemmyland Hotels</h2>
                 <p className="text-[9px] text-gray-500 m-0.5">Luxury Suites & Premium Lounge</p>
                 <p className="text-[9px] text-gray-500 m-0">{contactInfo.address}</p>
                 <p className="text-[9px] text-gray-500 m-0">{contactInfo.phone}</p>

@@ -36,10 +36,10 @@ const AdminAccounting = () => {
 
   // Dynamic Contact & White-label Info
   const [contactInfo, setContactInfo] = useState({
-    address: 'Plot 572 Iduwa Ogenyi Street Mabushi, Off Ahmadu Bello Way, Abuja',
+    address: 'No2. Gowon P Haruna Close, Karu, Abuja',
     phone: '08033214684, 08062332639, 08171278657',
-    email: 'info@sparklesapartments.ng',
-    companyName: 'Sparkles Apartments',
+    email: 'info@jemmylandhotels.com',
+    companyName: 'Jemmyland Hotels',
     logo: ''
   });
 
@@ -222,11 +222,11 @@ const AdminAccounting = () => {
       }
 
       // Check LocalStorage fallbacks or default hardcoded values
-      const contactAddress = settingsMap['contact_address'] || localStorage.getItem('contact_address') || 'Plot 572 Iduwa Ogenyi Street Mabushi, Off Ahmadu Bello Way, Abuja';
+      const contactAddress = settingsMap['contact_address'] || localStorage.getItem('contact_address') || 'No2. Gowon P Haruna Close, Karu, Abuja';
       const contactPhone = settingsMap['contact_phone'] || localStorage.getItem('contact_phone') || '08033214684, 08062332639, 08171278657';
-      const contactEmail = settingsMap['contact_email'] || localStorage.getItem('contact_email') || 'info@sparklesapartments.ng';
+      const contactEmail = settingsMap['contact_email'] || localStorage.getItem('contact_email') || 'info@jemmylandhotels.com';
       const contactLogo = settingsMap['contact_logo'] || localStorage.getItem('contact_logo') || '';
-      const companyName = resolvedProperties[0]?.name || 'Sparkles Apartments';
+      const companyName = resolvedProperties[0]?.name || 'Jemmyland Hotels';
 
       setContactInfo({
         address: contactAddress,
@@ -1572,8 +1572,8 @@ const AdminAccounting = () => {
           </table>
           
           <div class="footer">
-            Thank you for choosing Sparkles Apartments.<br />
-            For support or billing inquiries, please contact ${contactInfo.email || 'info@sparklesapartments.ng'}.
+            Thank you for choosing Jemmyland Hotels.<br />
+            For support or billing inquiries, please contact ${contactInfo.email || 'info@jemmylandhotels.com'}.
           </div>
         </body>
       </html>
@@ -5781,7 +5781,7 @@ const AdminAccounting = () => {
               {/* Report Header */}
               <div className="flex justify-between items-start border-b-2 border-gray-800 pb-4 text-left">
                 <div>
-                  <h1 className="text-2xl font-black uppercase tracking-wider text-pure-black">{contactInfo.companyName || 'Sparkles Apartments'}</h1>
+                  <h1 className="text-2xl font-black uppercase tracking-wider text-pure-black">{contactInfo.companyName || 'Jemmyland Hotels'}</h1>
                   <p className="text-[10px] text-pure-gray-500 mt-1 uppercase font-semibold">Night Audit & Daily Operations Closure Report</p>
                   <p className="text-[9px] text-pure-gray-400 mt-0.5">{contactInfo.address}</p>
                 </div>

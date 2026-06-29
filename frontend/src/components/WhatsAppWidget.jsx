@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
 
 const WhatsAppWidget = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('2348000000000'); // Fallback default
   
-  // Replace with the actual business WhatsApp number (with country code, no + or spaces)
-  const phoneNumber = '2348000000000';
-  const defaultMessage = "Hello Sparkles Apartments! I'm interested in booking a stay.";
+  useEffect(() => {
+    const fetchWhatsAppSetting = async () => {
+      const { data } = await supabase
+        .from('system_settings')
+        .select('setting_value')
+        .eq('setting_key', 'contact_whatsapp')
+        .single();
+        
+      if (data && data.setting_value) {
+        setPhoneNumber(data.setting_value);
+      }
+    };
+    fetchWhatsAppSetting();
+  }, []);
+  
+  const defaultMessage = "Hello Jemmyland Hotels! I'm interested in booking a stay.";
   
   const handleWhatsAppClick = () => {
+    if (!phoneNumber) return;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
     window.open(url, '_blank', 'noopener,noreferrer');
   };

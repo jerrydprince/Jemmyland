@@ -7,17 +7,17 @@ import { getCachedData, setCachedData } from '../utils/cache';
 
 const defaultHeroSlides = [
   {
-    image: 'https://pjmdlifojfwoviyugjwq.supabase.co/storage/v1/object/public/gallery_images/uploads/9a48a660-5a10-4f00-9690-6f2833d95c17.jpg',
+    image: '/Images/Room 1.png',
     title: 'Experience True Luxury',
-    subtitle: 'Elevate your stay in the heart of the city with our premium shortlets.'
+    subtitle: 'Elevate your stay in the heart of the city with our premium hotel.'
   },
   {
-    image: 'https://pjmdlifojfwoviyugjwq.supabase.co/storage/v1/object/public/gallery_images/uploads/1aec7ea7-b33f-4a56-9a98-527a63534b8d.webp',
+    image: '/Images/First Room.png',
     title: 'Designed for Comfort',
     subtitle: 'Every detail meticulously crafted for your ultimate relaxation.'
   },
   {
-    image: 'https://pjmdlifojfwoviyugjwq.supabase.co/storage/v1/object/public/gallery_images/uploads/c4727319-aff1-4e23-8afa-305b63f4029e.webp',
+    image: '/Images/open area.png',
     title: 'Your Private Sanctuary',
     subtitle: 'Exclusive amenities and serene environments await.'
   }
@@ -110,31 +110,25 @@ const Home = () => {
         const newSlides = [];
         
         // Slide 1
-        if (contentMap.cms_home_hero_bg_1 || contentMap.cms_home_hero_title) {
-          newSlides.push({
-            image: contentMap.cms_home_hero_bg_1 || defaultHeroSlides[0].image,
-            title: contentMap.cms_home_hero_title || defaultHeroSlides[0].title,
-            subtitle: contentMap.cms_home_hero_subtitle || defaultHeroSlides[0].subtitle
-          });
-        } else { newSlides.push(defaultHeroSlides[0]); }
+        newSlides.push({
+          image: '/Images/Room 1.png',
+          title: contentMap.cms_home_hero_title || 'Experience True Luxury',
+          subtitle: contentMap.cms_home_hero_subtitle || 'Elevate your stay in the heart of the city with our premium hotel.'
+        });
         
         // Slide 2
-        if (contentMap.cms_home_hero_bg_2 || contentMap.cms_home_hero_title_2) {
-          newSlides.push({
-            image: contentMap.cms_home_hero_bg_2 || defaultHeroSlides[1].image,
-            title: contentMap.cms_home_hero_title_2 || defaultHeroSlides[1].title,
-            subtitle: contentMap.cms_home_hero_subtitle_2 || defaultHeroSlides[1].subtitle
-          });
-        } else { newSlides.push(defaultHeroSlides[1]); }
+        newSlides.push({
+          image: '/Images/First Room.png',
+          title: contentMap.cms_home_hero_title_2 || 'Designed for Comfort',
+          subtitle: contentMap.cms_home_hero_subtitle_2 || 'Every detail meticulously crafted for your ultimate relaxation.'
+        });
         
         // Slide 3
-        if (contentMap.cms_home_hero_bg_3 || contentMap.cms_home_hero_title_3) {
-          newSlides.push({
-            image: contentMap.cms_home_hero_bg_3 || defaultHeroSlides[2].image,
-            title: contentMap.cms_home_hero_title_3 || defaultHeroSlides[2].title,
-            subtitle: contentMap.cms_home_hero_subtitle_3 || defaultHeroSlides[2].subtitle
-          });
-        } else { newSlides.push(defaultHeroSlides[2]); }
+        newSlides.push({
+          image: '/Images/open area.png',
+          title: contentMap.cms_home_hero_title_3 || 'Your Private Sanctuary',
+          subtitle: contentMap.cms_home_hero_subtitle_3 || 'Exclusive amenities and serene environments await.'
+        });
 
         setHeroSlides(newSlides);
       }
@@ -178,7 +172,7 @@ const Home = () => {
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center">
                 <div className="text-gold-500/10 font-serif text-6xl md:text-8xl lg:text-9xl select-none tracking-widest font-black mb-4 animate-pulse">
-                  SPARKLES
+                  JEMMYLAND
                 </div>
               </div>
             )}
@@ -261,18 +255,12 @@ const Home = () => {
               {cmsContent.cms_home_about_img_1 ? (
                 <img src={cmsContent.cms_home_about_img_1} alt="Interior 1" className="w-full h-80 object-cover rounded-sm mt-12" />
               ) : (
-                <div className="w-full h-80 rounded-sm mt-12 bg-dark-800 border border-dark-700 flex flex-col items-center justify-center p-6 text-center">
-                  <span className="text-gold-500 font-bold uppercase tracking-widest text-xs">Exquisite Spaces</span>
-                  <p className="text-gray-500 text-[10px] mt-2">Premium design and aesthetics</p>
-                </div>
+                <img src="/Images/Lounge.png" alt="Lounge Area" className="w-full h-80 object-cover rounded-sm mt-12 shadow-lg" />
               )}
               {cmsContent.cms_home_about_img_2 ? (
                 <img src={cmsContent.cms_home_about_img_2} alt="Interior 2" className="w-full h-80 object-cover rounded-sm" />
               ) : (
-                <div className="w-full h-80 rounded-sm bg-dark-800 border border-dark-700 flex flex-col items-center justify-center p-6 text-center">
-                  <span className="text-gold-500 font-bold uppercase tracking-widest text-xs">Unmatched Comfort</span>
-                  <p className="text-gray-500 text-[10px] mt-2">Redefining luxury shortlets</p>
-                </div>
+                <img src="/Images/restaurant.png" alt="Restaurant" className="w-full h-80 object-cover rounded-sm shadow-lg" />
               )}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-dark-800 p-8 text-center shadow-2xl border border-dark-700">
                 <p className="text-5xl font-serif text-gold-500 mb-2">5</p>
@@ -405,6 +393,56 @@ const Home = () => {
           </div>
           <div className="mt-16">
             <Link to="/amenities" className="btn-outline">View All Amenities</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 bg-dark-900 border-t border-dark-800">
+        <div className="container mx-auto px-6 text-center">
+          <h4 className="text-gold-500 font-medium tracking-widest uppercase mb-4">Guest Testimonials</h4>
+          <h2 className="text-4xl md:text-5xl font-bold mb-16">What Our Guests Say</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="bg-dark-800 p-8 border border-dark-700 rounded-xl hover:border-gold-500 transition-colors duration-300 text-left">
+              <div className="flex text-gold-500 mb-6">
+                <Star className="fill-gold-500" size={20} />
+                <Star className="fill-gold-500" size={20} />
+                <Star className="fill-gold-500" size={20} />
+                <Star className="fill-gold-500" size={20} />
+                <Star className="fill-gold-500" size={20} />
+              </div>
+              <p className="text-gray-300 text-lg mb-8 italic">
+                "An absolutely unforgettable experience! The attention to detail, the luxurious amenities, and the exceptional service made our stay at Jemmyland Hotels nothing short of perfect."
+              </p>
+              <div className="flex items-center gap-4">
+                <img src="/Images/Bob (Testimonial 1).png" alt="Guest Bob" className="w-16 h-16 rounded-full object-cover border-2 border-brand-500" />
+                <div>
+                  <h4 className="font-semibold text-white">David O.</h4>
+                  <p className="text-gray-500 text-sm">Business Traveler</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-dark-800 p-8 border border-dark-700 rounded-xl hover:border-gold-500 transition-colors duration-300 text-left">
+              <div className="flex text-gold-500 mb-6">
+                <Star className="fill-gold-500" size={20} />
+                <Star className="fill-gold-500" size={20} />
+                <Star className="fill-gold-500" size={20} />
+                <Star className="fill-gold-500" size={20} />
+                <Star className="fill-gold-500" size={20} />
+              </div>
+              <p className="text-gray-300 text-lg mb-8 italic">
+                "I was blown away by the comfort and elegance of my suite. It truly felt like a home away from home, but with all the perks of a five-star hotel. Highly recommended!"
+              </p>
+              <div className="flex items-center gap-4">
+                <img src="/Images/Lilian (Testimonial 2).png" alt="Guest Lilian" className="w-16 h-16 rounded-full object-cover border-2 border-brand-500" />
+                <div>
+                  <h4 className="font-semibold text-white">Sarah M.</h4>
+                  <p className="text-gray-500 text-sm">Vacationing Guest</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -57,7 +57,7 @@ const Contact = () => {
     }
   };
 
-  const phones = contactInfo.contact_phone ? contactInfo.contact_phone.split(',').map(p => p.trim()) : ['+234 800 LUXE APT'];
+  const phones = contactInfo.contact_phone ? contactInfo.contact_phone.split(',').map(p => p.trim()) : ['08103694837, 08174971881'];
 
   return (
     <div className="pt-24 min-h-screen bg-dark-900">
@@ -91,7 +91,7 @@ const Contact = () => {
                 <Mail size={24} />
               </div>
               <h3 className="text-xl font-medium mb-2">Email</h3>
-              <p className="text-gray-400">{contactInfo.contact_email || 'reservations@luxe.com'}</p>
+              <p className="text-gray-400">{contactInfo.contact_email || 'info@jemmylandhotels.com'}</p>
             </div>
           </div>
 

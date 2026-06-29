@@ -439,8 +439,8 @@ const AdminHalls = ({ isFrontOfficeClosed }) => {
               </head>
               <body>
                 <div class="header">
-                  <h1>SPARKLES APARTMENTS</h1>
-                  <p>Premium Luxury Shortlets</p>
+                  <h1>Jemmyland Hotels</h1>
+                  <p>Premium Luxury Hotel</p>
                 </div>
                 <p class="title">Installment Payment Receipt</p>
                 <table>
@@ -455,7 +455,7 @@ const AdminHalls = ({ isFrontOfficeClosed }) => {
                 </table>
                 <div class="amount">₦${amount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
                 <div class="footer">
-                  <p>Authorized and confirmed by Sparkles Apartments Front Office.</p>
+                  <p>Authorized and confirmed by Jemmyland Hotels Front Office.</p>
                 </div>
               </body>
             </html>
