@@ -252,8 +252,8 @@ const Home = () => {
               </Link>
             </div>
             <div className="lg:w-1/2 grid grid-cols-2 gap-6 relative">
-              <img src="/Images/Lounge.png" alt="Interior 1" className="w-full h-80 object-cover rounded-sm mt-12 shadow-lg" />
-              <img src="/Images/restaurant.png" alt="Restaurant" className="w-full h-80 object-cover rounded-sm shadow-lg" />
+              <img src="/Images/Lounge.png" alt="Interior 1" loading="lazy" className="w-full h-80 object-cover rounded-sm mt-12 shadow-lg" />
+              <img src="/Images/restaurant.png" alt="Restaurant" loading="lazy" className="w-full h-80 object-cover rounded-sm shadow-lg" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-dark-800 p-8 text-center shadow-2xl border border-dark-700">
                 <p className="text-5xl font-serif text-gold-500 mb-2">5</p>
                 <p className="text-sm uppercase tracking-widest text-gray-300">Star Rating</p>

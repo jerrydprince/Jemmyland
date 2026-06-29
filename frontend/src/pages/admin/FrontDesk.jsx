@@ -2504,17 +2504,17 @@ const AdminFrontDesk = () => {
         </div>
       )}
       {/* Header Panel */}
-      <div className="bg-dark-800 border border-dark-700 p-6 shadow-sm flex flex-col md:flex-row justify-between items-center rounded-lg">
+      <div className="bg-dark-800 border border-dark-700 p-6 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center rounded-lg gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Front Desk & Reception</h1>
-          <p className="text-gray-400 flex items-center gap-2 mt-1">
+          <p className="text-gray-400 flex items-center gap-2 mt-1 text-sm md:text-base">
             <CalendarIcon size={16} />
             {currentTime.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
           </p>
         </div>
-        <div className="mt-4 md:mt-0 flex items-center gap-4">
+        <div className="flex flex-wrap items-center gap-2 md:gap-4">
           {hasAccess('Store Keeping - Log Requisitions') && (
-            <button onClick={() => setIsRequisitionOpen(true)} className="bg-brand-500/10 hover:bg-brand-500 border border-brand-500/20 text-brand-400 hover:text-white py-2 px-4 flex items-center gap-2 mr-2 rounded text-sm font-bold transition-all shadow">
+            <button onClick={() => setIsRequisitionOpen(true)} className="bg-brand-500/10 hover:bg-brand-500 border border-brand-500/20 text-brand-400 hover:text-white py-2 px-3 md:px-4 flex items-center gap-2 rounded text-xs md:text-sm font-bold transition-all shadow">
               <Archive size={16}/> Store Requisition
             </button>
           )}
@@ -2524,10 +2524,11 @@ const AdminFrontDesk = () => {
               setIsActivateWalletOpen(true);
             }} 
             disabled={isFrontOfficeClosed}
-            className="bg-brand-500/10 hover:bg-brand-500 border border-brand-500/20 text-brand-400 hover:text-white py-2 px-4 flex items-center gap-2 mr-2 rounded text-sm font-bold transition-all shadow disabled:opacity-40 disabled:cursor-not-allowed"
+            className="bg-brand-500/10 hover:bg-brand-500 border border-brand-500/20 text-brand-400 hover:text-white py-2 px-3 md:px-4 flex items-center gap-2 rounded text-xs md:text-sm font-bold transition-all shadow disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <Wallet size={16}/>
-            <span>Activate Guest Wallet</span>
+            <span className="hidden sm:inline">Activate Guest Wallet</span>
+            <span className="sm:hidden">Wallet</span>
           </button>
           <button 
             onClick={() => {
@@ -2535,10 +2536,11 @@ const AdminFrontDesk = () => {
               setIsAddGroupOpen(true);
             }} 
             disabled={isFrontOfficeClosed}
-            className="bg-brand-500/10 hover:bg-brand-500 border border-brand-500/20 text-brand-400 hover:text-white py-2 px-4 flex items-center gap-2 mr-2 rounded text-sm font-bold transition-all shadow disabled:opacity-40 disabled:cursor-not-allowed"
+            className="bg-brand-500/10 hover:bg-brand-500 border border-brand-500/20 text-brand-400 hover:text-white py-2 px-3 md:px-4 flex items-center gap-2 rounded text-xs md:text-sm font-bold transition-all shadow disabled:opacity-40 disabled:cursor-not-allowed"
           >
             <Users size={16}/>
-            <span>New Group Account</span>
+            <span className="hidden sm:inline">New Group Account</span>
+            <span className="sm:hidden">Group</span>
           </button>
           <button 
             onClick={() => {
@@ -2546,7 +2548,7 @@ const AdminFrontDesk = () => {
               setIsNoShowSweepOpen(true);
             }}
             disabled={isFrontOfficeClosed}
-            className={`relative py-2 px-4 flex items-center gap-2 mr-2 rounded text-sm font-bold transition-all shadow disabled:opacity-40 disabled:cursor-not-allowed ${
+            className={`relative py-2 px-3 md:px-4 flex items-center gap-2 rounded text-xs md:text-sm font-bold transition-all shadow disabled:opacity-40 disabled:cursor-not-allowed ${
               noShowBookings.length > 0
                 ? 'bg-amber-500/10 hover:bg-amber-500 border border-amber-500/30 text-amber-400 hover:text-dark-900'
                 : 'bg-dark-700 hover:bg-dark-600 border border-dark-600 text-gray-300'
@@ -2554,7 +2556,8 @@ const AdminFrontDesk = () => {
             title={`${noShowBookings.length} expired arrival(s) detected`}
           >
             <ShieldCheck size={16} />
-            <span>Sweep No-Shows</span>
+            <span className="hidden sm:inline">Sweep No-Shows</span>
+            <span className="sm:hidden">No-Shows</span>
             {noShowBookings.length > 0 && (
               <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-red-500 shadow-[0_0_6px_#ef4444] animate-pulse"></span>
             )}
@@ -2563,18 +2566,20 @@ const AdminFrontDesk = () => {
             const todayStr = format(new Date(), 'yyyy-MM-dd');
             const closure = departmentalClosures.find(c => c.department === 'front_office' && c.business_date === todayStr);
             return closure ? (
-              <div className="bg-green-500/10 text-green-400 border border-green-500/25 px-4 py-2 rounded text-xs font-bold flex items-center gap-2 mr-2">
+              <div className="bg-green-500/10 text-green-400 border border-green-500/25 px-3 md:px-4 py-2 rounded text-xs font-bold flex items-center gap-2">
                 <CheckCircle size={14} className="text-green-500" />
-                <span>Closed today by {closure.staff_name}</span>
+                <span className="hidden sm:inline">Closed today by {closure.staff_name}</span>
+                <span className="sm:hidden">Closed</span>
               </div>
             ) : (
               <button 
                 onClick={handleCompileCloseOfDayFrontDesk}
                 disabled={isCompilingCloseOfDay}
-                className="bg-amber-500 hover:bg-amber-600 disabled:opacity-50 text-dark-950 px-4 py-2 rounded text-xs font-bold flex items-center gap-1.5 transition-all shadow-md active:scale-95 cursor-pointer mr-2"
+                className="bg-amber-500 hover:bg-amber-600 disabled:opacity-50 text-dark-950 px-3 md:px-4 py-2 rounded text-xs font-bold flex items-center gap-1.5 transition-all shadow-md active:scale-95 cursor-pointer"
               >
                 <Clock size={14} />
-                <span>Close of Day</span>
+                <span className="hidden sm:inline">Close of Day</span>
+                <span className="sm:hidden">Close</span>
               </button>
             );
           })()}
@@ -2584,10 +2589,14 @@ const AdminFrontDesk = () => {
               setIsNewBookingModalOpen(true);
             }} 
             disabled={isFrontOfficeClosed}
-            className="btn-primary py-2 px-4 flex items-center gap-2 mr-4 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="btn-primary py-2 px-3 md:px-4 flex items-center gap-2 text-xs md:text-sm disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            <Plus size={18}/> New Booking
+            <Plus size={16} className="sm:w-[18px] sm:h-[18px]" /> 
+            <span className="hidden sm:inline">New Booking</span>
+            <span className="sm:hidden">Book</span>
           </button>
+        </div>
+        <div className="flex items-center gap-4">
           <div className="text-right">
             <p className="text-3xl font-bold text-white">{currentTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
             <p className="text-sm text-gray-500 uppercase tracking-widest">Local Time</p>
@@ -3587,13 +3596,13 @@ const AdminFrontDesk = () => {
                   }, {});
 
                 return (
-                  <div className="flex overflow-auto custom-scrollbar select-none relative w-full flex-1">
-                    <div className="flex flex-col min-w-max">
+                  <div className="overflow-auto custom-scrollbar select-none relative w-full flex-1">
+                    <div className="block min-w-max">
                       
                       {/* --- HEADER ROW (Sticky Top) --- */}
-                      <div className="flex h-[76px] bg-dark-950 border-b border-dark-700 sticky top-0 z-40">
+                      <div className="flex h-[76px] bg-dark-900 border-b border-dark-700 sticky top-0 z-40">
                         {/* Top Left Fixed Cell (Sticky Top & Left) */}
-                        <div className="w-[120px] md:w-[280px] min-w-[120px] md:min-w-[280px] p-2 md:p-4 flex items-center justify-start sticky left-0 z-50 bg-dark-950 border-r border-dark-700 shadow-[4px_0_10px_rgba(0,0,0,0.3)]">
+                        <div className="w-[120px] md:w-[280px] min-w-[120px] md:min-w-[280px] p-2 md:p-4 flex items-center justify-start sticky left-0 z-50 bg-dark-900 border-r border-dark-700 shadow-[4px_0_10px_rgba(0,0,0,0.3)]">
                           <span className="text-[10px] md:text-xs uppercase font-bold tracking-wider text-gray-400">Accommodation</span>
                         </div>
                         

@@ -676,14 +676,15 @@ const AdminReservations = ({ onUpdate, isFrontOfficeClosed }) => {
           </div>
         </div>
       )}
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-semibold">Reservation Management</h1>
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
+        <h1 className="text-xl sm:text-2xl font-semibold">Reservation Management</h1>
         <button 
           disabled={isFrontOfficeClosed}
           onClick={openCreateModal} 
-          className="btn-primary py-2 px-4 text-sm flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="btn-primary py-2 px-4 text-sm flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed w-full sm:w-auto"
         >
-          <Plus size={18}/> Create Manual Booking
+          <Plus size={18}/> 
+          <span>Create Manual Booking</span>
         </button>
       </div>
 

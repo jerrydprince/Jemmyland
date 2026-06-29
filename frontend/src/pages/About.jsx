@@ -87,8 +87,8 @@ const About = () => {
               transition={{ duration: 0.8 }}
               className="lg:w-1/2 grid grid-cols-2 gap-4 relative"
             >
-              <img src="/Images/Diamond rooms.png" alt="Interior 1" className="w-full h-72 object-cover rounded-sm mt-12 shadow-2xl" />
-              <img src="/Images/Executive Suites.png" alt="Interior 2" className="w-full h-72 object-cover rounded-sm shadow-2xl" />
+              <img src="/Images/Diamond rooms.png" alt="Interior 1" loading="lazy" className="w-full h-72 object-cover rounded-sm mt-12 shadow-2xl" />
+              <img src="/Images/Executive Suites.png" alt="Interior 2" loading="lazy" className="w-full h-72 object-cover rounded-sm shadow-2xl" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold-500 text-dark-900 p-8 text-center shadow-2xl z-10 w-48">
                 <p className="text-5xl font-bold mb-1">{cmsContent.cms_about_years || "10+"}</p>
                 <p className="text-sm uppercase tracking-widest font-semibold">Years of Excellence</p>

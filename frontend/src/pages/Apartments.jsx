@@ -4,9 +4,40 @@ import { ArrowRight, Wifi, Tv, Coffee, Wind } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { getCachedData, setCachedData } from '../utils/cache';
 
+const groupRoomsIntoCategories = (roomsData) => {
+  if (!roomsData) return [];
+  const getLocalImageForRoom = (type) => {
+    if (type.toLowerCase().includes('diamond')) return '/Images/Diamond rooms.png';
+    if (type.toLowerCase().includes('executive') || type.toLowerCase().includes('suite')) return '/Images/Executive Suites.png';
+    return '/Images/First Room.png';
+  };
+
+  const grouped = roomsData.reduce((acc, room) => {
+    if (!acc[room.type]) {
+      acc[room.type] = {
+        type: room.type,
+        count: 0,
+        base_price: room.base_price_ngn,
+        capacity: room.capacity,
+        size_sqm: room.size_sqm,
+        image_url: getLocalImageForRoom(room.type), 
+        sampleId: room.id,
+        amenities: room.amenities || ['Free Wi-Fi', 'Smart TV', 'Room Service']
+      };
+    }
+    acc[room.type].count++;
+    if (room.base_price_ngn < acc[room.type].base_price) {
+      acc[room.type].base_price = room.base_price_ngn;
+    }
+    return acc;
+  }, {});
+  
+  return Object.values(grouped);
+};
+
 const Apartments = () => {
   const cachedRooms = getCachedData('rooms');
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState(cachedRooms ? groupRoomsIntoCategories(cachedRooms) : []);
   const [loading, setLoading] = useState(!cachedRooms);
 
   useEffect(() => {
@@ -17,35 +48,7 @@ const Apartments = () => {
     try {
       const { data, error } = await supabase.from('rooms').select('id, name, type, capacity, size_sqm, base_price_ngn, image_url, status, amenities').order('name');
       if (data) {
-        // Group by room type for 96 rooms
-        const getLocalImageForRoom = (type) => {
-          if (type.toLowerCase().includes('diamond')) return '/Images/Diamond rooms.png';
-          if (type.toLowerCase().includes('executive') || type.toLowerCase().includes('suite')) return '/Images/Executive Suites.png';
-          return '/Images/First Room.png';
-        };
-
-        const grouped = data.reduce((acc, room) => {
-          if (!acc[room.type]) {
-            acc[room.type] = {
-              type: room.type,
-              count: 0,
-              base_price: room.base_price_ngn,
-              capacity: room.capacity,
-              size_sqm: room.size_sqm,
-              image_url: getLocalImageForRoom(room.type), 
-              sampleId: room.id,
-              amenities: room.amenities || ['Free Wi-Fi', 'Smart TV', 'Room Service']
-            };
-          }
-          acc[room.type].count++;
-          if (room.base_price_ngn < acc[room.type].base_price) {
-            acc[room.type].base_price = room.base_price_ngn;
-          }
-          return acc;
-        }, {});
-        
-        const categoriesArray = Object.values(grouped);
-        setCategories(categoriesArray);
+        setCategories(groupRoomsIntoCategories(data));
         setCachedData('rooms', data);
       }
     } catch (e) {
