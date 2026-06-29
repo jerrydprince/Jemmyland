@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { format, differenceInDays } from 'date-fns';
 import { useAuth, validateStrongPassword } from '../../context/AuthContext';
 import { useRealtimeSync } from '../../lib/useRealtimeSync';
+import { sendResendEmail } from '../../lib/emailService';
 
 // Secondary Auth client for silent signup
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
@@ -1638,6 +1639,41 @@ const AdminStaffManagement = () => {
           });
 
           toast.success('Staff account successfully promoted and activated!', { id: loadingToast });
+          
+          // Send Onboarding Email for Promoted Staff
+          try {
+            await sendResendEmail({
+              to: newStaffForm.email,
+              subject: `Welcome to the Team, ${newStaffForm.first_name}! (Jemmyland Hotels Onboarding)`,
+              html: `
+                <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
+                  <h2 style="color: #d4af37;">Welcome to Jemmyland Hotels, ${newStaffForm.first_name}!</h2>
+                  <p>Your staff profile has been successfully activated. We are thrilled to have you join our team.</p>
+                  
+                  <h3 style="border-bottom: 1px solid #eee; padding-bottom: 5px;">Your Employment Details:</h3>
+                  <ul>
+                    <li><strong>Role:</strong> <span style="text-transform: uppercase;">${newStaffForm.role}</span></li>
+                    <li><strong>Shift Name:</strong> ${newStaffForm.shift_name} (${newStaffForm.shift_start_time} - ${newStaffForm.shift_end_time})</li>
+                    <li><strong>Expected Working Days:</strong> ${newStaffForm.expected_work_days_count} days/week</li>
+                    <li><strong>Base Salary:</strong> ₦${parseFloat(newStaffForm.base_salary).toLocaleString()}</li>
+                  </ul>
+
+                  <h3 style="border-bottom: 1px solid #eee; padding-bottom: 5px;">System Login Credentials:</h3>
+                  <p>Please use the following credentials to access the internal staff portal. You can reset your password anytime from the dashboard.</p>
+                  <ul>
+                    <li><strong>Email/Username:</strong> ${newStaffForm.email}</li>
+                    <li><strong>Password:</strong> ${newStaffForm.password}</li>
+                  </ul>
+                  
+                  <p>If you have any questions, please speak with your immediate supervisor or Human Resources.</p>
+                  <p style="margin-top: 30px; font-size: 12px; color: #777;">Regards,<br/>Jemmyland Hotels HR Administration</p>
+                </div>
+              `
+            });
+          } catch (emailErr) {
+            console.warn("Onboarding email failed:", emailErr);
+          }
+
           setShowAddStaff(false);
           setNewStaffForm({ 
             first_name: '', last_name: '', phone: '', role: 'receptionist',
@@ -1726,6 +1762,41 @@ const AdminStaffManagement = () => {
       });
 
       toast.success('Staff added successfully!', { id: loadingToast });
+      
+      // Send Onboarding Email for New Staff
+      try {
+        await sendResendEmail({
+          to: newStaffForm.email,
+          subject: `Welcome to the Team, ${newStaffForm.first_name}! (Jemmyland Hotels Onboarding)`,
+          html: `
+            <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #d4af37;">Welcome to Jemmyland Hotels, ${newStaffForm.first_name}!</h2>
+              <p>Your staff profile has been successfully activated. We are thrilled to have you join our team.</p>
+              
+              <h3 style="border-bottom: 1px solid #eee; padding-bottom: 5px;">Your Employment Details:</h3>
+              <ul>
+                <li><strong>Role:</strong> <span style="text-transform: uppercase;">${newStaffForm.role}</span></li>
+                <li><strong>Shift Name:</strong> ${newStaffForm.shift_name} (${newStaffForm.shift_start_time} - ${newStaffForm.shift_end_time})</li>
+                <li><strong>Expected Working Days:</strong> ${newStaffForm.expected_work_days_count} days/week</li>
+                <li><strong>Base Salary:</strong> ₦${parseFloat(newStaffForm.base_salary).toLocaleString()}</li>
+              </ul>
+
+              <h3 style="border-bottom: 1px solid #eee; padding-bottom: 5px;">System Login Credentials:</h3>
+              <p>Please use the following credentials to access the internal staff portal. You can reset your password anytime from the dashboard.</p>
+              <ul>
+                <li><strong>Email/Username:</strong> ${newStaffForm.email}</li>
+                <li><strong>Password:</strong> ${newStaffForm.password}</li>
+              </ul>
+              
+              <p>If you have any questions, please speak with your immediate supervisor or Human Resources.</p>
+              <p style="margin-top: 30px; font-size: 12px; color: #777;">Regards,<br/>Jemmyland Hotels HR Administration</p>
+            </div>
+          `
+        });
+      } catch (emailErr) {
+        console.warn("Onboarding email failed:", emailErr);
+      }
+
       setShowAddStaff(false);
       setNewStaffForm({ 
         first_name: '', last_name: '', phone: '', role: 'receptionist',
