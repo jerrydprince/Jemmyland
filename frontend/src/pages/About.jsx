@@ -32,28 +32,20 @@ const About = () => {
       {/* Hero Section */}
       <section className="relative h-[60vh] flex items-center justify-center">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/60 z-10" />
-          {cmsContent.cms_about_hero_bg ? (
-            <img 
-              src={cmsContent.cms_about_hero_bg} 
-              alt="About Luxe Apartments" 
-              className="w-full h-full object-cover"
-            />
-          ) : (
-            <div 
-              className="w-full h-full"
-              style={{
-                background: 'radial-gradient(circle at center, #27272a 0%, #09090b 100%)'
-              }}
-            />
-          )}
+          <img 
+            src="/Images/open area.png" 
+            alt="About Jemmyland Hotels" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/70 z-10" />
         </div>
         <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl font-bold text-white mb-6"
+            className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg"
+            style={{ color: '#ffffff' }}
           >
             {cmsContent.cms_about_title || "Our Story"}
           </motion.h1>
@@ -61,7 +53,8 @@ const About = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-xl text-gray-300 font-light"
+            className="text-xl font-light drop-shadow-md"
+            style={{ color: '#ffffff' }}
           >
             {cmsContent.cms_about_subtitle || "Redefining luxury living and hospitality, one exquisite apartment at a time."}
           </motion.p>
@@ -94,22 +87,8 @@ const About = () => {
               transition={{ duration: 0.8 }}
               className="lg:w-1/2 grid grid-cols-2 gap-4 relative"
             >
-              {cmsContent.cms_about_img_1 ? (
-                <img src={cmsContent.cms_about_img_1} alt="Interior 1" className="w-full h-72 object-cover rounded-sm mt-12 shadow-2xl" />
-              ) : (
-                <div className="w-full h-72 rounded-sm mt-12 bg-dark-800 border border-dark-700 flex flex-col items-center justify-center p-6 text-center shadow-2xl">
-                  <span className="text-gold-500 font-bold uppercase tracking-widest text-xs">Exquisite Spaces</span>
-                  <p className="text-gray-500 text-[10px] mt-2">Premium design and aesthetics</p>
-                </div>
-              )}
-              {cmsContent.cms_about_img_2 ? (
-                <img src={cmsContent.cms_about_img_2} alt="Interior 2" className="w-full h-72 object-cover rounded-sm shadow-2xl" />
-              ) : (
-                <div className="w-full h-72 rounded-sm bg-dark-800 border border-dark-700 flex flex-col items-center justify-center p-6 text-center shadow-2xl">
-                  <span className="text-gold-500 font-bold uppercase tracking-widest text-xs">Unmatched Comfort</span>
-                  <p className="text-gray-500 text-[10px] mt-2">Redefining luxury hotel</p>
-                </div>
-              )}
+              <img src="/Images/Diamond rooms.png" alt="Interior 1" className="w-full h-72 object-cover rounded-sm mt-12 shadow-2xl" />
+              <img src="/Images/Executive Suites.png" alt="Interior 2" className="w-full h-72 object-cover rounded-sm shadow-2xl" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold-500 text-dark-900 p-8 text-center shadow-2xl z-10 w-48">
                 <p className="text-5xl font-bold mb-1">{cmsContent.cms_about_years || "10+"}</p>
                 <p className="text-sm uppercase tracking-widest font-semibold">Years of Excellence</p>

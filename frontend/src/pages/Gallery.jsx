@@ -70,8 +70,12 @@ const Gallery = () => {
                 className="relative group overflow-hidden bg-dark-800 aspect-[4/3] cursor-pointer border border-dark-700 hover:border-gold-500/50 transition-colors"
               >
                 <img 
-                  src={img.image_url} 
-                  alt={img.caption || 'Sparkles Gallery'} 
+                  src={[
+                    '/Images/Room 1.png', '/Images/Diamond rooms.png', '/Images/Executive Suites.png',
+                    '/Images/First Room.png', '/Images/Lounge.png', '/Images/Snoker Board.png',
+                    '/Images/open area.png', '/Images/pool.png', '/Images/restaurant.png'
+                  ][idx % 9]} 
+                  alt={img.caption || 'Jemmyland Gallery'} 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
@@ -137,8 +141,12 @@ const Gallery = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.3 }}
-                src={images[activeIdx].image_url} 
-                alt={images[activeIdx].caption || 'Gallery Image'} 
+                src={[
+                  '/Images/Room 1.png', '/Images/Diamond rooms.png', '/Images/Executive Suites.png',
+                  '/Images/First Room.png', '/Images/Lounge.png', '/Images/Snoker Board.png',
+                  '/Images/open area.png', '/Images/pool.png', '/Images/restaurant.png'
+                ][activeIdx % 9]} 
+                alt={images[activeIdx].caption || 'Jemmyland Gallery Image'} 
                 className="max-w-full max-h-[75vh] object-contain rounded shadow-2xl border border-dark-700"
               />
               

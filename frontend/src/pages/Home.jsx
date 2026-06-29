@@ -52,7 +52,7 @@ const Home = () => {
     // Slide 1
     if (cachedCmsContent.cms_home_hero_bg_1 || cachedCmsContent.cms_home_hero_title) {
       newSlides.push({
-        image: cachedCmsContent.cms_home_hero_bg_1 || defaultHeroSlides[0].image,
+        image: defaultHeroSlides[0].image,
         title: cachedCmsContent.cms_home_hero_title || defaultHeroSlides[0].title,
         subtitle: cachedCmsContent.cms_home_hero_subtitle || defaultHeroSlides[0].subtitle
       });
@@ -61,7 +61,7 @@ const Home = () => {
     // Slide 2
     if (cachedCmsContent.cms_home_hero_bg_2 || cachedCmsContent.cms_home_hero_title_2) {
       newSlides.push({
-        image: cachedCmsContent.cms_home_hero_bg_2 || defaultHeroSlides[1].image,
+        image: defaultHeroSlides[1].image,
         title: cachedCmsContent.cms_home_hero_title_2 || defaultHeroSlides[1].title,
         subtitle: cachedCmsContent.cms_home_hero_subtitle_2 || defaultHeroSlides[1].subtitle
       });
@@ -70,7 +70,7 @@ const Home = () => {
     // Slide 3
     if (cachedCmsContent.cms_home_hero_bg_3 || cachedCmsContent.cms_home_hero_title_3) {
       newSlides.push({
-        image: cachedCmsContent.cms_home_hero_bg_3 || defaultHeroSlides[2].image,
+        image: defaultHeroSlides[2].image,
         title: cachedCmsContent.cms_home_hero_title_3 || defaultHeroSlides[2].title,
         subtitle: cachedCmsContent.cms_home_hero_subtitle_3 || defaultHeroSlides[2].subtitle
       });
@@ -252,16 +252,8 @@ const Home = () => {
               </Link>
             </div>
             <div className="lg:w-1/2 grid grid-cols-2 gap-6 relative">
-              {cmsContent.cms_home_about_img_1 ? (
-                <img src={cmsContent.cms_home_about_img_1} alt="Interior 1" className="w-full h-80 object-cover rounded-sm mt-12" />
-              ) : (
-                <img src="/Images/Lounge.png" alt="Lounge Area" className="w-full h-80 object-cover rounded-sm mt-12 shadow-lg" />
-              )}
-              {cmsContent.cms_home_about_img_2 ? (
-                <img src={cmsContent.cms_home_about_img_2} alt="Interior 2" className="w-full h-80 object-cover rounded-sm" />
-              ) : (
-                <img src="/Images/restaurant.png" alt="Restaurant" className="w-full h-80 object-cover rounded-sm shadow-lg" />
-              )}
+              <img src="/Images/Lounge.png" alt="Interior 1" className="w-full h-80 object-cover rounded-sm mt-12 shadow-lg" />
+              <img src="/Images/restaurant.png" alt="Restaurant" className="w-full h-80 object-cover rounded-sm shadow-lg" />
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-dark-800 p-8 text-center shadow-2xl border border-dark-700">
                 <p className="text-5xl font-serif text-gold-500 mb-2">5</p>
                 <p className="text-sm uppercase tracking-widest text-gray-300">Star Rating</p>
@@ -450,16 +442,7 @@ const Home = () => {
       <section className="py-24 relative flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0 bg-dark-950">
           <div className="absolute inset-0 bg-dark-900/90 z-10" />
-          {cmsContent.cms_home_cta_bg ? (
-            <img src={cmsContent.cms_home_cta_bg} alt="CTA Background" className="w-full h-full object-cover" />
-          ) : (
-            <div 
-              className="w-full h-full"
-              style={{
-                background: 'radial-gradient(circle at center, #27272a 0%, #09090b 100%)'
-              }}
-            />
-          )}
+          <img src="/Images/open area.png" alt="CTA Background" className="w-full h-full object-cover" />
         </div>
         <div className="relative z-20 text-center px-6 max-w-4xl">
           <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]">{cmsContent.cms_home_cta_title || 'Ready to experience the exceptional?'}</h2>
