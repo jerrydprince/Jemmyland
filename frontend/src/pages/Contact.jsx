@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { sendResendEmail } from '../lib/emailService';
 import toast from 'react-hot-toast';
 
 const Contact = () => {
@@ -33,21 +34,30 @@ const Contact = () => {
     setSubmitting(true);
     const toastId = toast.loading("Sending your message...");
     try {
-      const API_BASE = import.meta.env.VITE_API_URL || '/api';
-      const response = await fetch(`${API_BASE}/contact/submit`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(form)
+      const emailHtml = `
+        <div style="font-family: Arial, sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #d4af37;">New Contact Request</h2>
+          <p><strong>Name:</strong> ${form.name}</p>
+          <p><strong>Email:</strong> ${form.email}</p>
+          <p><strong>Subject:</strong> ${form.subject}</p>
+          <div style="margin-top: 20px; padding: 15px; border-left: 4px solid #d4af37; background: #f9f9f9;">
+            <p style="white-space: pre-wrap;">${form.message}</p>
+          </div>
+        </div>
+      `;
+
+      const response = await sendResendEmail({
+        to: 'contact@jemmylandhotels.com',
+        subject: `Contact Form: ${form.subject}`,
+        html: emailHtml,
+        from: form.email
       });
 
-      const res = await response.json();
-      if (response.ok && res.success) {
+      if (response && response.success) {
         toast.success("Message sent successfully!", { id: toastId });
         setForm({ name: '', email: '', subject: '', message: '' });
       } else {
-        throw new Error(res.error || "Failed to send message.");
+        throw new Error(response.error || "Failed to send message.");
       }
     } catch (err) {
       console.error(err);
