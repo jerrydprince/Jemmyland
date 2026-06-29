@@ -195,23 +195,24 @@ const TopbarAttendanceClock = () => {
       {/* Pulse Status Toggle Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`flex items-center gap-2.5 px-4 py-2.5 rounded-xl border transition-all duration-300 backdrop-blur-md ${
+        className={`flex items-center gap-1.5 sm:gap-2.5 px-2.5 py-1.5 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl border transition-all duration-300 backdrop-blur-md ${
           activeShift 
             ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/20 hover:border-emerald-500/50' 
             : 'bg-amber-500/10 border-amber-500/30 text-amber-400 hover:bg-amber-500/20 hover:border-amber-500/50'
         }`}
       >
-        <span className="relative flex h-2.5 w-2.5">
+        <span className="relative flex h-2 sm:h-2.5 w-2 sm:w-2.5 shrink-0">
           <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
             activeShift ? 'bg-emerald-400' : 'bg-amber-400'
           }`}></span>
-          <span className={`relative inline-flex rounded-full h-2.5 w-2.5 ${
+          <span className={`relative inline-flex rounded-full h-2 sm:h-2.5 w-2 sm:w-2.5 ${
             activeShift ? 'bg-emerald-500' : 'bg-amber-500'
           }`}></span>
         </span>
         
-        <span className="text-sm font-bold tracking-wide select-none font-mono">
-          {activeShift ? `On Shift: ${elapsed || '00:00:00'}` : 'Off Shift / Clock In'}
+        <span className="text-[10px] sm:text-sm font-bold tracking-wide select-none font-mono truncate max-w-[120px] sm:max-w-none">
+          <span className="hidden sm:inline">{activeShift ? `On Shift: ${elapsed || '00:00:00'}` : 'Off Shift / Clock In'}</span>
+          <span className="sm:hidden">{activeShift ? (elapsed || '00:00') : 'Clock In'}</span>
         </span>
       </button>
 

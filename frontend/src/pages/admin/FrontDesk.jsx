@@ -3593,8 +3593,8 @@ const AdminFrontDesk = () => {
                       {/* --- HEADER ROW (Sticky Top) --- */}
                       <div className="flex h-[76px] bg-dark-950 border-b border-dark-700 sticky top-0 z-40">
                         {/* Top Left Fixed Cell (Sticky Top & Left) */}
-                        <div className="w-[280px] min-w-[280px] p-4 flex items-center justify-start sticky left-0 z-50 bg-dark-950 border-r border-dark-700 shadow-[4px_0_10px_rgba(0,0,0,0.3)]">
-                          <span className="text-xs uppercase font-bold tracking-wider text-gray-400">Accommodation</span>
+                        <div className="w-[120px] md:w-[280px] min-w-[120px] md:min-w-[280px] p-2 md:p-4 flex items-center justify-start sticky left-0 z-50 bg-dark-950 border-r border-dark-700 shadow-[4px_0_10px_rgba(0,0,0,0.3)]">
+                          <span className="text-[10px] md:text-xs uppercase font-bold tracking-wider text-gray-400">Accommodation</span>
                         </div>
                         
                         {/* Dates Row */}
@@ -3641,8 +3641,8 @@ const AdminFrontDesk = () => {
                             
                             {/* Group Header Row */}
                             <div className="flex h-[40px] bg-dark-950/20 border-b border-dark-800">
-                              <div className="w-[280px] min-w-[280px] px-4 flex items-center justify-start sticky left-0 z-30 bg-dark-950/70 border-r border-dark-800 shadow-[4px_0_10px_rgba(0,0,0,0.3)]">
-                                <span className="text-[11px] font-bold text-brand-500 uppercase tracking-widest truncate">{type}</span>
+                              <div className="w-[120px] md:w-[280px] min-w-[120px] md:min-w-[280px] px-2 md:px-4 flex items-center justify-start sticky left-0 z-30 bg-dark-950/70 border-r border-dark-800 shadow-[4px_0_10px_rgba(0,0,0,0.3)]">
+                                <span className="text-[9px] md:text-[11px] font-bold text-brand-500 uppercase tracking-widest truncate">{type}</span>
                               </div>
                               <div className="flex flex-grow border-r border-dark-800/40">
                                 {days.map((dayStr) => (
@@ -3661,12 +3661,12 @@ const AdminFrontDesk = () => {
                               return (
                                 <div key={room.id} className="group flex h-[54px] border-b border-dark-800/20 hover:bg-dark-800/20 transition-colors">
                                   {/* Left Fixed Cell (Accommodation) */}
-                                  <div className="w-[280px] min-w-[280px] px-4 flex flex-col justify-center items-start sticky left-0 z-30 bg-dark-900 border-r border-dark-800/40 shadow-[4px_0_10px_rgba(0,0,0,0.3)] group-hover:bg-dark-800/40 transition-colors">
-                                    <span className="font-bold text-white text-sm flex items-center gap-1.5">
-                                      <Key size={13} className="text-brand-500" />
-                                      {room.room_number}
+                                  <div className="w-[120px] md:w-[280px] min-w-[120px] md:min-w-[280px] px-2 md:px-4 flex flex-col justify-center items-start sticky left-0 z-30 bg-dark-900 border-r border-dark-800/40 shadow-[4px_0_10px_rgba(0,0,0,0.3)] group-hover:bg-dark-800/40 transition-colors">
+                                    <span className="font-bold text-white text-xs md:text-sm flex items-center gap-1.5">
+                                      <Key size={13} className="text-brand-500 shrink-0" />
+                                      <span className="truncate">{room.room_number}</span>
                                     </span>
-                                    <span className="text-xs text-gray-400 truncate max-w-full mt-0.5">{room.name || room.type}</span>
+                                    <span className="text-[10px] md:text-xs text-gray-400 truncate max-w-[100px] md:max-w-full mt-0.5">{room.name || room.type}</span>
                                   </div>
                                   
                                   {/* Timeline Cell Area */}
