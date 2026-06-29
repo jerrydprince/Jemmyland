@@ -73,12 +73,16 @@ const GuestDashboard = () => {
         if (activeNextStay?.rooms?.id) {
           supabase
             .from('rooms')
-            .select('image_url')
+            .select('type')
             .eq('id', activeNextStay.rooms.id)
             .single()
             .then(({ data, error }) => {
-              if (!error && data?.image_url) {
-                setNextStayImageUrl(data.image_url);
+              if (!error && data?.type) {
+                let localImage = '/Images/First Room.png';
+                if (data.type.toLowerCase().includes('diamond')) localImage = '/Images/Diamond rooms.png';
+                else if (data.type.toLowerCase().includes('executive') || data.type.toLowerCase().includes('suite')) localImage = '/Images/Executive Suites.png';
+                
+                setNextStayImageUrl(localImage);
               }
             });
         }

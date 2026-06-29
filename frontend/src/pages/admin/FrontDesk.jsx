@@ -193,6 +193,7 @@ const AdminFrontDesk = () => {
   const [housekeepingTasks, setHousekeepingTasks] = useState([]);
   const [maintenanceTickets, setMaintenanceTickets] = useState([]);
   const [matrixFilter, setMatrixFilter] = useState('all'); // all, occupied, clean, dirty, maintenance
+  const [matrixSearchQuery, setMatrixSearchQuery] = useState('');
   const [activeInspection, setActiveInspection] = useState(null);
   const [checklist, setChecklist] = useState({ bed: false, bathroom: false, trash: false, floors: false, restock: false });
   const [preselectedRoomId, setPreselectedRoomId] = useState(null);
@@ -3086,6 +3087,17 @@ const AdminFrontDesk = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping"></span>
               Live Grid System
             </div>
+            {/* Search Bar */}
+            <div className="w-full md:w-auto mt-2 md:mt-0 relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
+              <input
+                type="text"
+                placeholder="Search rooms, guests, or ref..."
+                value={matrixSearchQuery}
+                onChange={(e) => setMatrixSearchQuery(e.target.value)}
+                className="w-full md:w-64 bg-dark-900/50 border border-dark-700/80 text-white text-sm pl-10 pr-4 py-2 rounded-lg outline-none focus:border-brand-500/80 transition-all shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]"
+              />
+            </div>
           </div>
 
           {/* Matrix Grid */}
@@ -3100,12 +3112,29 @@ const AdminFrontDesk = () => {
               const isClean = taskStatus === 'inspected';
               const isDirty = ['pending', 'failed', 'cleaning', 'cleaned'].includes(taskStatus);
 
-              if (matrixFilter === 'all') return true;
-              if (matrixFilter === 'occupied') return isOccupied;
-              if (matrixFilter === 'clean') return !isOccupied && isClean && !maintTicket;
-              if (matrixFilter === 'dirty') return !isOccupied && isDirty && !maintTicket;
-              if (matrixFilter === 'maintenance') return !!maintTicket;
-              return true;
+              let matchesFilter = true;
+              if (matrixFilter === 'occupied') matchesFilter = isOccupied;
+              if (matrixFilter === 'clean') matchesFilter = !isOccupied && isClean && !maintTicket;
+              if (matrixFilter === 'dirty') matchesFilter = !isOccupied && isDirty && !maintTicket;
+              if (matrixFilter === 'maintenance') matchesFilter = !!maintTicket;
+
+              let matchesSearch = true;
+              if (matrixSearchQuery) {
+                const query = matrixSearchQuery.toLowerCase();
+                const roomName = (room.name || '').toLowerCase();
+                const roomNum = (room.room_number || '').toLowerCase();
+                const type = (room.type || '').toLowerCase();
+                
+                let guestMatch = false;
+                if (activeBooking) {
+                   const guestName = (activeBooking.profiles ? `${activeBooking.profiles.first_name} ${activeBooking.profiles.last_name}` : (activeBooking.guest_name || '')).toLowerCase();
+                   const ref = (activeBooking.booking_reference || '').toLowerCase();
+                   guestMatch = guestName.includes(query) || ref.includes(query);
+                }
+                matchesSearch = roomName.includes(query) || roomNum.includes(query) || type.includes(query) || guestMatch;
+              }
+
+              return matchesFilter && matchesSearch;
             }).map(room => {
               const activeBooking = inHouse.find(b => b.room_id === room.id);
               const latestTask = housekeepingTasks.find(t => t.room_id === room.id);
@@ -3536,7 +3565,7 @@ const AdminFrontDesk = () => {
           </div>
 
           {/* Timeline Grid Container */}
-          <div className="bg-dark-800 border border-dark-700 rounded-lg overflow-hidden shadow-sm flex flex-col min-h-[500px]">
+          <div className="bg-dark-800 border border-dark-700 rounded-lg overflow-hidden shadow-sm flex flex-col h-[70vh] min-h-[500px]">
             {calendarLoading ? (
               <div className="flex-1 flex flex-col items-center justify-center text-gray-500 py-32 space-y-4">
                 <div className="w-10 h-10 border-4 border-brand-500 border-t-transparent rounded-full animate-spin"></div>
@@ -3558,179 +3587,164 @@ const AdminFrontDesk = () => {
                   }, {});
 
                 return (
-                  <div className="flex overflow-x-auto custom-scrollbar select-none relative w-full flex-1">
-                    
-                    {/* Fixed Left Sidebar: Accommodation List */}
-                    <div className="w-[280px] min-w-[280px] bg-dark-900 border-r border-dark-700 flex-shrink-0 z-20 sticky left-0 shadow-[4px_0_10px_rgba(0,0,0,0.3)]">
-                      {/* Left Header */}
-                      <div className="h-[76px] bg-dark-950 border-b border-dark-700 p-4 flex items-center justify-start">
-                        <span className="text-xs uppercase font-bold tracking-wider text-gray-400">Accommodation</span>
-                      </div>
+                  <div className="flex overflow-auto custom-scrollbar select-none relative w-full flex-1">
+                    <div className="flex flex-col min-w-max">
                       
-                      {/* Left Groups & Rooms */}
-                      <div className="divide-y divide-dark-800">
-                        {Object.entries(roomsGroupedByType).map(([type, roomsList]) => (
-                          <div key={type} className="flex flex-col">
-                            {/* Group Label */}
-                            <div className="bg-dark-950/70 border-b border-dark-800 h-[40px] px-4 flex items-center justify-start text-[11px] font-bold text-brand-500 uppercase tracking-widest truncate">
-                              {type}
-                            </div>
-                            {/* Rooms List */}
-                            {roomsList.map(room => (
-                              <div key={room.id} className="h-[54px] px-4 border-b border-dark-800/40 flex flex-col justify-center items-start hover:bg-dark-800/40 transition-colors">
-                                <span className="font-bold text-white text-sm flex items-center gap-1.5">
-                                  <Key size={13} className="text-brand-500" />
-                                  {room.room_number}
+                      {/* --- HEADER ROW (Sticky Top) --- */}
+                      <div className="flex h-[76px] bg-dark-950 border-b border-dark-700 sticky top-0 z-40">
+                        {/* Top Left Fixed Cell (Sticky Top & Left) */}
+                        <div className="w-[280px] min-w-[280px] p-4 flex items-center justify-start sticky left-0 z-50 bg-dark-950 border-r border-dark-700 shadow-[4px_0_10px_rgba(0,0,0,0.3)]">
+                          <span className="text-xs uppercase font-bold tracking-wider text-gray-400">Accommodation</span>
+                        </div>
+                        
+                        {/* Dates Row */}
+                        <div className="flex">
+                          {days.map((dayStr) => {
+                            const dateObj = new Date(dayStr + 'T00:00:00');
+                            const isTodayStr = format(new Date(), 'yyyy-MM-dd') === dayStr;
+                            
+                            return (
+                              <div 
+                                key={dayStr} 
+                                style={{ width: '90px', minWidth: '90px', maxWidth: '90px' }}
+                                className={`flex-shrink-0 flex flex-col items-center justify-center p-2 relative transition-all duration-200 border-r border-dark-700/40 ${
+                                  isTodayStr 
+                                    ? 'bg-gradient-to-b from-brand-500/15 to-brand-500/0 text-brand-500 font-bold' 
+                                    : 'hover:bg-dark-900/40'
+                                }`}
+                              >
+                                {isTodayStr && (
+                                  <div className="absolute inset-x-1.5 top-1.5 bottom-1.5 border border-brand-500/40 rounded-lg pointer-events-none shadow-[inset_0_0_8px_rgba(234,179,8,0.1),0_0_10px_rgba(234,179,8,0.15)] bg-brand-500/[0.02]"></div>
+                                )}
+                                <span className={`text-[9px] uppercase font-black tracking-widest leading-none ${isTodayStr ? 'text-brand-500' : 'text-gray-500'}`}>
+                                  {format(dateObj, 'eee')}
                                 </span>
-                                <span className="text-xs text-gray-400 truncate max-w-full mt-0.5">{room.name || room.type}</span>
+                                <span className={`text-xl font-extrabold tracking-tighter leading-none mt-1 ${isTodayStr ? 'text-brand-400 font-black' : 'text-white'}`}>
+                                  {format(dateObj, 'd')}
+                                </span>
+                                <span className={`text-[9px] uppercase font-bold mt-1 leading-none ${isTodayStr ? 'text-brand-500/80' : 'text-gray-400'}`}>
+                                  {format(dateObj, 'MMM')}
+                                </span>
+                                {isTodayStr && (
+                                  <span className="absolute bottom-0 inset-x-0 h-[3px] bg-brand-500 shadow-[0_-2px_10px_#eab308]"></span>
+                                )}
                               </div>
-                            ))}
-                          </div>
-                        ))}
-                        {Object.keys(roomsGroupedByType).length === 0 && (
-                          <div className="p-8 text-center text-gray-600 text-xs italic">No matching rooms found.</div>
-                        )}
+                            );
+                          })}
+                        </div>
                       </div>
-                    </div>
-
-                    {/* Scrollable Right Area: Day Columns Timeline */}
-                    <div className="flex-grow flex flex-col min-w-0 z-10" style={{ width: `${totalTimelineWidth}px`, minWidth: `${totalTimelineWidth}px`, flexShrink: 0 }}>
                       
-                      {/* Timeline Header Row (Dates) */}
-                      <div className="h-[76px] bg-dark-950 border-b border-dark-700 flex-shrink-0 flex sticky top-0 z-20">
-                        {days.map((dayStr) => {
-                          const dateObj = new Date(dayStr + 'T00:00:00');
-                          const isTodayStr = format(new Date(), 'yyyy-MM-dd') === dayStr;
-                          
-                          return (
-                            <div 
-                              key={dayStr} 
-                              style={{ width: '90px', minWidth: '90px', maxWidth: '90px' }}
-                              className={`flex-shrink-0 flex flex-col items-center justify-center p-2 relative transition-all duration-200 border-r border-dark-700/40 ${
-                                isTodayStr 
-                                  ? 'bg-gradient-to-b from-brand-500/15 to-brand-500/0 text-brand-500 font-bold' 
-                                  : 'hover:bg-dark-900/40'
-                              }`}
-                            >
-                              {isTodayStr && (
-                                <div className="absolute inset-x-1.5 top-1.5 bottom-1.5 border border-brand-500/40 rounded-lg pointer-events-none shadow-[inset_0_0_8px_rgba(234,179,8,0.1),0_0_10px_rgba(234,179,8,0.15)] bg-brand-500/[0.02]"></div>
-                              )}
-                              <span className={`text-[9px] uppercase font-black tracking-widest leading-none ${isTodayStr ? 'text-brand-500' : 'text-gray-500'}`}>
-                                {format(dateObj, 'eee')}
-                              </span>
-                              <span className={`text-xl font-extrabold tracking-tighter leading-none mt-1 ${isTodayStr ? 'text-brand-400 font-black' : 'text-white'}`}>
-                                {format(dateObj, 'd')}
-                              </span>
-                              <span className={`text-[9px] uppercase font-bold mt-1 leading-none ${isTodayStr ? 'text-brand-500/80' : 'text-gray-400'}`}>
-                                {format(dateObj, 'MMM')}
-                              </span>
-                              {isTodayStr && (
-                                <span className="absolute bottom-0 inset-x-0 h-[3px] bg-brand-500 shadow-[0_-2px_10px_#eab308]"></span>
-                              )}
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* Timeline Body Rows */}
-                      <div className="flex flex-col divide-y divide-dark-800 select-none flex-grow">
+                      {/* --- BODY ROWS --- */}
+                      <div className="flex flex-col relative z-0">
                         {Object.entries(roomsGroupedByType).map(([type, roomsList]) => (
                           <div key={type} className="flex flex-col">
-                            {/* Group Segment Header Background placeholder */}
-                            <div className="bg-dark-950/20 border-b border-dark-800 h-[40px] flex items-center flex-shrink-0 relative">
-                              {days.map((dayStr) => (
-                                <div key={dayStr} style={{ width: '90px', minWidth: '90px', maxWidth: '90px' }} className="border-r border-dark-800/40 h-full flex-shrink-0"></div>
-                              ))}
+                            
+                            {/* Group Header Row */}
+                            <div className="flex h-[40px] bg-dark-950/20 border-b border-dark-800">
+                              <div className="w-[280px] min-w-[280px] px-4 flex items-center justify-start sticky left-0 z-30 bg-dark-950/70 border-r border-dark-800 shadow-[4px_0_10px_rgba(0,0,0,0.3)]">
+                                <span className="text-[11px] font-bold text-brand-500 uppercase tracking-widest truncate">{type}</span>
+                              </div>
+                              <div className="flex flex-grow border-r border-dark-800/40">
+                                {days.map((dayStr) => (
+                                  <div key={dayStr} style={{ width: '90px', minWidth: '90px', maxWidth: '90px' }} className="border-r border-dark-800/40 h-full flex-shrink-0"></div>
+                                ))}
+                              </div>
                             </div>
                             
-                            {/* Rooms Horizontal Timeline Rows */}
+                            {/* Room Rows */}
                             {roomsList.map(room => {
-                              // Filter bookings for this room that should display on the calendar
                               const roomBookings = calendarBookings.filter(b => 
                                 b.room_id === room.id && 
                                 (calendarStatusFilter === 'all' || b.status === calendarStatusFilter)
                               );
 
                               return (
-                                <div 
-                                  key={room.id} 
-                                  className="h-[54px] relative flex border-b border-dark-800/20 hover:bg-dark-800/20 transition-colors flex-shrink-0"
-                                >
-                                  {/* Grid background lines */}
-                                  {days.map((dayStr) => {
-                                    const isTodayStr = format(new Date(), 'yyyy-MM-dd') === dayStr;
-                                    return (
-                                      <div 
-                                        key={dayStr} 
-                                        style={{ width: '90px', minWidth: '90px', maxWidth: '90px' }}
-                                        className={`border-r border-dark-700/20 h-full flex-shrink-0 relative ${
-                                          isTodayStr ? 'bg-gradient-to-b from-brand-500/[0.02] to-transparent shadow-[inset_0_0_8px_rgba(234,179,8,0.01)]' : ''
-                                        }`}
-                                      >
-                                        {isTodayStr && (
-                                          <span className="absolute top-0 bottom-0 left-0 w-[1px] bg-brand-500/10 pointer-events-none"></span>
-                                        )}
-                                      </div>
-                                    );
-                                  })}
-
-                                  {/* Booking Timeline Bars absolutely positioned on top */}
-                                  {roomBookings.map(booking => {
-                                    const barStyle = getBookingStyle(booking, days);
-                                    const guestName = booking.profiles 
-                                      ? `${booking.profiles.first_name} ${booking.profiles.last_name}` 
-                                      : booking.guest_name;
-                                      
-                                    // Custom premium colors & icons based on reservation status
-                                    let statusColorClass = 'bg-gradient-to-r from-green-500/15 to-green-500/5 border-green-500/30 border-l-[5px] border-l-green-500 text-green-400 hover:from-green-500/25 hover:to-green-500/10 shadow-[0_4px_12px_rgba(34,197,94,0.08)]';
-                                    let StatusIcon = CheckCircle;
-                                    
-                                    if (booking.status === 'pending') {
-                                      statusColorClass = 'bg-gradient-to-r from-yellow-500/15 to-yellow-500/5 border-yellow-500/30 border-l-[5px] border-l-yellow-500 text-yellow-400 hover:from-yellow-500/25 hover:to-yellow-500/10 shadow-[0_4px_12px_rgba(234,179,8,0.08)]';
-                                      StatusIcon = Clock;
-                                    } else if (booking.status === 'checked_in') {
-                                      statusColorClass = 'bg-gradient-to-r from-purple-500/15 to-purple-500/5 border-purple-500/30 border-l-[5px] border-l-purple-500 text-purple-400 hover:from-purple-500/25 hover:to-purple-500/10 shadow-[0_4px_12px_rgba(168,85,247,0.08)]';
-                                      StatusIcon = UserCheck;
-                                    } else if (booking.status === 'checked_out') {
-                                      statusColorClass = 'bg-gradient-to-r from-gray-500/15 to-gray-500/5 border-gray-500/30 border-l-[5px] border-l-gray-400 text-gray-300 hover:from-gray-500/25 hover:to-gray-500/10 shadow-[0_4px_12px_rgba(156,163,175,0.05)]';
-                                      StatusIcon = LogOut;
-                                    } else if (booking.status === 'no_show') {
-                                      statusColorClass = 'bg-gradient-to-r from-orange-500/15 to-orange-500/5 border-orange-500/30 border-l-[5px] border-l-orange-500 text-orange-400 hover:from-orange-500/25 hover:to-orange-500/10 shadow-[0_4px_12px_rgba(249,115,22,0.08)]';
-                                      StatusIcon = AlertTriangle;
-                                    } else if (room.status === 'maintenance' || booking.status === 'maintenance') {
-                                      statusColorClass = 'bg-gradient-to-r from-red-500/15 to-red-500/5 border-red-500/30 border-l-[5px] border-l-red-500 text-red-400 hover:from-red-500/25 hover:to-red-500/10 shadow-[0_4px_12px_rgba(239,68,68,0.08)]';
-                                      StatusIcon = Wrench;
-                                    }
-
-                                    return (
-                                      <div 
-                                        key={booking.id}
-                                        style={barStyle}
-                                        onClick={() => setSelectedCalendarBooking(booking)}
-                                        className={`rounded-lg border px-3 py-1 flex flex-col justify-center backdrop-blur-sm cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:-translate-y-[1px] hover:shadow-[0_6px_16px_rgba(0,0,0,0.6)] ${statusColorClass}`}
-                                      >
-                                        <div className="flex items-center justify-between gap-2 overflow-hidden">
-                                          <span className="text-[9px] font-mono font-bold tracking-wider leading-none truncate max-w-full opacity-90 flex items-center gap-1">
-                                            <StatusIcon size={9} className="opacity-80" />
-                                            {booking.booking_reference || 'MANUAL'}
-                                          </span>
-                                          {booking.profiles?.vip_status && (
-                                            <span className="bg-yellow-500/30 text-yellow-300 text-[8px] font-black tracking-widest uppercase px-1 rounded-sm leading-none flex-shrink-0 animate-pulse border border-yellow-500/20">VIP</span>
+                                <div key={room.id} className="group flex h-[54px] border-b border-dark-800/20 hover:bg-dark-800/20 transition-colors">
+                                  {/* Left Fixed Cell (Accommodation) */}
+                                  <div className="w-[280px] min-w-[280px] px-4 flex flex-col justify-center items-start sticky left-0 z-30 bg-dark-900 border-r border-dark-800/40 shadow-[4px_0_10px_rgba(0,0,0,0.3)] group-hover:bg-dark-800/40 transition-colors">
+                                    <span className="font-bold text-white text-sm flex items-center gap-1.5">
+                                      <Key size={13} className="text-brand-500" />
+                                      {room.room_number}
+                                    </span>
+                                    <span className="text-xs text-gray-400 truncate max-w-full mt-0.5">{room.name || room.type}</span>
+                                  </div>
+                                  
+                                  {/* Timeline Cell Area */}
+                                  <div className="flex relative">
+                                    {/* Grid Background Lines */}
+                                    {days.map((dayStr) => {
+                                      const isTodayStr = format(new Date(), 'yyyy-MM-dd') === dayStr;
+                                      return (
+                                        <div 
+                                          key={dayStr} 
+                                          style={{ width: '90px', minWidth: '90px', maxWidth: '90px' }}
+                                          className={`border-r border-dark-700/20 h-full flex-shrink-0 relative ${
+                                            isTodayStr ? 'bg-gradient-to-b from-brand-500/[0.02] to-transparent shadow-[inset_0_0_8px_rgba(234,179,8,0.01)]' : ''
+                                          }`}
+                                        >
+                                          {isTodayStr && (
+                                            <span className="absolute top-0 bottom-0 left-0 w-[1px] bg-brand-500/10 pointer-events-none"></span>
                                           )}
                                         </div>
-                                        <p className="text-[11px] font-extrabold leading-tight truncate max-w-full mt-0.5 tracking-tight text-white/90">
-                                          {guestName}
-                                        </p>
-                                      </div>
-                                    );
-                                  })}
+                                      );
+                                    })}
+
+                                    {/* Booking Timeline Bars */}
+                                    {roomBookings.map(booking => {
+                                      const barStyle = getBookingStyle(booking, days);
+                                      const guestName = booking.profiles 
+                                        ? `${booking.profiles.first_name} ${booking.profiles.last_name}` 
+                                        : booking.guest_name;
+                                        
+                                      let statusColorClass = 'bg-gradient-to-r from-green-500/15 to-green-500/5 border-green-500/30 border-l-[5px] border-l-green-500 text-green-400 hover:from-green-500/25 hover:to-green-500/10 shadow-[0_4px_12px_rgba(34,197,94,0.08)]';
+                                      let StatusIcon = CheckCircle;
+                                      
+                                      if (booking.status === 'pending') {
+                                        statusColorClass = 'bg-gradient-to-r from-yellow-500/15 to-yellow-500/5 border-yellow-500/30 border-l-[5px] border-l-yellow-500 text-yellow-400 hover:from-yellow-500/25 hover:to-yellow-500/10 shadow-[0_4px_12px_rgba(234,179,8,0.08)]';
+                                        StatusIcon = Clock;
+                                      } else if (booking.status === 'checked_in') {
+                                        statusColorClass = 'bg-gradient-to-r from-purple-500/15 to-purple-500/5 border-purple-500/30 border-l-[5px] border-l-purple-500 text-purple-400 hover:from-purple-500/25 hover:to-purple-500/10 shadow-[0_4px_12px_rgba(168,85,247,0.08)]';
+                                        StatusIcon = UserCheck;
+                                      } else if (booking.status === 'checked_out') {
+                                        statusColorClass = 'bg-gradient-to-r from-gray-500/15 to-gray-500/5 border-gray-500/30 border-l-[5px] border-l-gray-400 text-gray-300 hover:from-gray-500/25 hover:to-gray-500/10 shadow-[0_4px_12px_rgba(156,163,175,0.05)]';
+                                        StatusIcon = LogOut;
+                                      } else if (booking.status === 'no_show') {
+                                        statusColorClass = 'bg-gradient-to-r from-orange-500/15 to-orange-500/5 border-orange-500/30 border-l-[5px] border-l-orange-500 text-orange-400 hover:from-orange-500/25 hover:to-orange-500/10 shadow-[0_4px_12px_rgba(249,115,22,0.08)]';
+                                        StatusIcon = AlertTriangle;
+                                      } else if (room.status === 'maintenance' || booking.status === 'maintenance') {
+                                        statusColorClass = 'bg-gradient-to-r from-red-500/15 to-red-500/5 border-red-500/30 border-l-[5px] border-l-red-500 text-red-400 hover:from-red-500/25 hover:to-red-500/10 shadow-[0_4px_12px_rgba(239,68,68,0.08)]';
+                                        StatusIcon = Wrench;
+                                      }
+
+                                      return (
+                                        <div 
+                                          key={booking.id}
+                                          style={barStyle}
+                                          onClick={() => setSelectedCalendarBooking(booking)}
+                                          className={`rounded-lg border px-3 py-1 flex flex-col justify-center backdrop-blur-sm cursor-pointer transition-all duration-300 hover:scale-[1.02] hover:-translate-y-[1px] hover:shadow-[0_6px_16px_rgba(0,0,0,0.6)] ${statusColorClass}`}
+                                        >
+                                          <div className="flex items-center justify-between gap-2 overflow-hidden">
+                                            <span className="text-[9px] font-mono font-bold tracking-wider leading-none truncate max-w-full opacity-90 flex items-center gap-1">
+                                              <StatusIcon size={9} className="opacity-80" />
+                                              {booking.booking_reference || 'MANUAL'}
+                                            </span>
+                                            {booking.profiles?.vip_status && (
+                                              <span className="bg-yellow-500/30 text-yellow-300 text-[8px] font-black tracking-widest uppercase px-1 rounded-sm leading-none flex-shrink-0 animate-pulse border border-yellow-500/20">VIP</span>
+                                            )}
+                                          </div>
+                                          <p className="text-[11px] font-extrabold leading-tight truncate max-w-full mt-0.5 tracking-tight text-white/90">
+                                            {guestName}
+                                          </p>
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
                                 </div>
                               );
                             })}
                           </div>
                         ))}
                       </div>
-
                     </div>
                   </div>
                 );

@@ -309,17 +309,16 @@ const Home = () => {
                   className="bg-dark-800 border border-dark-700 group overflow-hidden flex flex-col h-full flex-shrink-0 w-[300px] sm:w-[350px] md:w-[380px] snap-start transition-all duration-300 hover:shadow-[0_10px_30px_rgba(245,158,11,0.15)] hover:border-gold-500/50"
                 >
                   <div className="relative h-64 overflow-hidden">
-                    {room.image_url ? (
-                      <img 
-                        src={room.image_url} 
-                        alt={room.name} 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-dark-900 to-black text-center p-4">
-                        <span className="text-gold-500 font-serif text-base tracking-widest uppercase">Luxe Residence</span>
-                      </div>
-                    )}
+                    <img 
+                      src={(() => {
+                        const type = room.type || '';
+                        if (type.toLowerCase().includes('diamond')) return '/Images/Diamond rooms.png';
+                        if (type.toLowerCase().includes('executive') || type.toLowerCase().includes('suite')) return '/Images/Executive Suites.png';
+                        return '/Images/First Room.png';
+                      })()} 
+                      alt={room.name} 
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
                     
                     {/* Status Badge */}
                     <div className="absolute top-4 left-4 bg-dark-900/90 backdrop-blur-sm px-3 py-1.5 text-xs font-semibold border border-dark-700 uppercase tracking-wider flex items-center gap-1.5 rounded-sm">

@@ -46,8 +46,17 @@ const RoomDetails = () => {
         } catch (e) {}
       }
     } catch (e) {}
-    const images = ext.images || [];
-    const mainImg = images.length > 0 ? images[0] : roomData.image_url;
+    const getLocalImageForRoom = (type) => {
+      if (!type) return '/Images/First Room.png';
+      if (type.toLowerCase().includes('diamond')) return '/Images/Diamond rooms.png';
+      if (type.toLowerCase().includes('executive') || type.toLowerCase().includes('suite')) return '/Images/Executive Suites.png';
+      return '/Images/First Room.png';
+    };
+    
+    const mainImg = getLocalImageForRoom(roomData.type);
+    const images = [mainImg, '/Images/Room 1.png', '/Images/open area.png']; 
+    ext.images = images;
+    
     return { ext, mainImg };
   };
 

@@ -1953,7 +1953,16 @@ const BookingEngine = () => {
                       ) : (
                         availableRooms.map(room => (
                           <div key={room.id} className={`bg-dark-800 border transition-all duration-300 flex flex-col md:flex-row ${selectedRoom?.id === room.id ? 'border-gold-500 shadow-lg shadow-gold-500/10' : 'border-dark-700 hover:border-gray-500'}`}>
-                            <img src={room.image_url} alt={room.name} className="w-full md:w-1/3 h-48 md:h-auto object-cover" />
+                            <img 
+                              src={(() => {
+                                const type = room.type || '';
+                                if (type.toLowerCase().includes('diamond')) return '/Images/Diamond rooms.png';
+                                if (type.toLowerCase().includes('executive') || type.toLowerCase().includes('suite')) return '/Images/Executive Suites.png';
+                                return '/Images/First Room.png';
+                              })()}
+                              alt={room.name} 
+                              className="w-full md:w-1/3 h-48 md:h-auto object-cover" 
+                            />
                             <div className="p-6 flex-1 flex flex-col justify-between">
                               <div>
                                 <div className="flex justify-between items-start mb-2">
