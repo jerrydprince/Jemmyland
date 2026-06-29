@@ -224,10 +224,10 @@ const TopbarAttendanceClock = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-12 z-50 w-80 glass-panel bg-dark-800/95 border border-dark-700/80 backdrop-blur-lg shadow-2xl rounded-2xl p-5 overflow-hidden text-white"
+            className="fixed left-4 right-4 sm:absolute sm:left-auto sm:right-0 top-16 sm:top-12 z-50 sm:w-80 glass-panel bg-dark-800/95 border border-dark-700/80 backdrop-blur-lg shadow-2xl rounded-2xl p-4 sm:p-5 overflow-hidden text-white mx-auto max-w-sm sm:max-w-none"
           >
             {/* Ambient gold/green accent circle inside popover */}
-            <div className={`absolute -top-12 -right-12 w-28 h-28 rounded-full blur-3xl opacity-20 transition-colors duration-500 ${
+            <div className={`absolute -top-12 -right-12 w-20 h-20 sm:w-28 sm:h-28 rounded-full blur-3xl opacity-20 transition-colors duration-500 ${
               activeShift ? 'bg-emerald-500' : 'bg-amber-500'
             }`}></div>
 
